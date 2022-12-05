@@ -8,7 +8,6 @@ void Manager::run()
 	// get all inputs
 	getinputNumberOfCitiesandRoads();
 	getinputStartingAndEndPoint();
-
 	getPairsOfRoadLocation();
 
 	//cities = buildCitiesColors();
@@ -56,14 +55,21 @@ void Manager::getinputStartingAndEndPoint()
 void Manager::getPairsOfRoadLocation()
 {
 	int road1, road2;
+	cout << "please enter " << _numOfRoads << " pairs of roads: ";
 
 	for (int i = 0; i < _numOfRoads; i++)
 	{
 		cin >> road1;
 		cin >> road2;
 
+		_roadPair.resize(_numOfRoads);
+
 		_roadPair[i].first = road1;
 		_roadPair[i].second = road2;
+
+		// for debug
+		cout << "pair #" << i << " is: ";
+		cout << "< " << _roadPair[i].first << " , " << _roadPair[i].second << " >" << endl;
 	}
 }
 
