@@ -29,13 +29,12 @@ public:
 	void run();
 	void getinputNumberOfCitiesandRoads();
 	void getinputStartingAndEndPoint();
+	void getPairsOfRoadLocation();
 
 	int getNumberOfCities() { return _numOfCities; };
 	int getNumberOfRoads() { return _numOfRoads; };
 	City* getStartingPoint() { return _startingPoint; };
 	City* getEndPoint() { return _endPoint; };
-
-	void getPairsOfRoadLocation();
 
 	bool isValid(int input) { return (input >= 0 && input <= _numOfCities) ? true : false; };
 
@@ -43,7 +42,7 @@ public:
 	Country* buildCountry(eColors* cities);
 
 	int townDistanceRec(Country* country, City* startCity, City* endCity, eColors* colors);
-	void townDistanceIter(Country* country, City* startCity, City* endCity, eColors* colors);
+	//void townDistanceIter(Country* country, City* startCity, City* endCity, eColors* colors);
 
 
 };
