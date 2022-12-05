@@ -11,7 +11,8 @@ private:
 	City* _nextCity;
 
 public:
-	City(int cityNum = 0, City* nextCity = nullptr);
+	City();
+	City(int cityNum, City* nextCity);
 
 	void setCityNumber(int cityNum);
 	void setColor(int binary) { _color = binary; }

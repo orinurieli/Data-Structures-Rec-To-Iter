@@ -1,7 +1,16 @@
 #pragma once
+
 #include "City.h"
 #include "List.h"
 
+
+City::City()
+{
+	_cityNum = 0;
+	_color = 1; 
+	_nearbyCities = new List;
+	_nextCity = nullptr;
+}
 
 City::City(int cityNum, City* nextCity)
 {
@@ -13,7 +22,7 @@ City::City(int cityNum, City* nextCity)
 
 void City::setCityNumber(int cityNum)
 {
-	this->_cityNum = cityNum;
+	_cityNum = cityNum;
 }
 
 int City::getCityNumber() const

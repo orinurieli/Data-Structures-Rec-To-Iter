@@ -4,8 +4,7 @@
 
 List::List()
 {
-	City* city = new City(0, NULL);
-	_head = city;
+	_head = nullptr;
 	_tail = _head; // todo dummy head
 }
 

@@ -44,12 +44,12 @@ void Manager::getinputStartingAndEndPoint()
 	cout << " ( between 1 to " << _numOfCities << " ): ";
 	cin >> startingCityNumber;
 
-	_startingPoint->setCityNumber(startingCityNumber);
+	_startingPoint = new City(startingCityNumber, nullptr);
 
-	cout << "Enter number of starting city ";
+	cout << "Enter number of end city: ";
 	cin >> endCityNumber;
 
-	_endPoint->setCityNumber(endCityNumber);
+	_endPoint = new City(endCityNumber, nullptr);
 }
 
 
