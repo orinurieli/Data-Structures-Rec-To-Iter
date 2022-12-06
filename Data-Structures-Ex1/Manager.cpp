@@ -1,5 +1,11 @@
 #include "Manager.h"
 
+Manager::Manager()
+{
+	_srcCityNumber = new City();
+	_destCityNumber = new City();
+}
+
 void Manager::run()
 {
 	// get all inputs & build the country structure
@@ -31,7 +37,7 @@ int* Manager::buildCitiesColorsArr()
 	return citiesColorsArr;
 }
 
-int Manager::townDistanceRec(Country* country, City* srcCityNumber, City* destCityNumber, int* citiesColorsArr) 
+int Manager::townDistanceRec(Country* country, City* srcCityNumber, City* destCityNumber, int* citiesColorsArr)
 {
 	// turn statring city to black
 	srcCityNumber->setColor(0); // black
@@ -96,7 +102,7 @@ void Manager::getinputStartingAndEndPoint()
 	cout << "Enter number of source city ";
 	cout << "(between 1 to " << _country.getNumOfCities() << "): ";
 	cin >> srcCityNumber;
-	//TODO: check input
+
 	if (isValidInput(srcCityNumber, 1, _country.getNumOfCities()))
 	{
 		_srcCityNumber->setCityNumber(srcCityNumber);

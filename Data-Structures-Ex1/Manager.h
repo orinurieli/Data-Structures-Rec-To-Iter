@@ -10,11 +10,6 @@
 
 using namespace std;
 
-//enum class eColors
-//{
-//	WHITE = 0,
-//	BLACK = 1
-//};
 
 class Manager
 {
@@ -24,10 +19,9 @@ private:
 	City* _destCityNumber;
 	vector<pair<int, int>> _roadLocation;
 	int* _citiesColorsArr;
-	//int _numOfCities;
-	//int _numOfRoads;
 
 public:
+	Manager();
 	void run();
 
 	int* buildCitiesColorsArr();
@@ -45,5 +39,5 @@ public:
 	City* getSrcCityNumber() { return _srcCityNumber; }
 	City* getDestCityNumber() { return _destCityNumber; }
 
-	bool isValidInput(int inputUser,int from, int to); /*{ return (inputUser >= 0 && inputUser <= _country.getNumOfCities()) ? true : false; }*/
+	bool isValidInput(int inputUser, int from, int to); /*{ return (inputUser >= 0 && inputUser <= _country.getNumOfCities()) ? true : false; }*/
 };

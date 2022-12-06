@@ -57,6 +57,7 @@ void Country::fillCountryStructure(vector<pair<int, int>> roadLocation)
 	{											   // 1-4 1-2 3-5 2-5 2-3
 		firstCityNumber = roadLocation[i].first;
 		secondCityNumber = roadLocation[i].second;
+
 		//TODO: check input
 		City* nearbyCityToFirst = new City(secondCityNumber);
 		City* nearbyCityToSecond = new City(firstCityNumber);
