@@ -40,4 +40,5 @@ public:
 	City* getDestCityNumber() { return _destCityNumber; }
 
 	bool isValidInput(int inputUser, int from, int to); /*{ return (inputUser >= 0 && inputUser <= _country.getNumOfCities()) ? true : false; }*/
+	vector<pair<int, int>> removeDuplicates(vector<pair<int, int>> arr);
 };

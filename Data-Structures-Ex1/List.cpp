@@ -1,9 +1,10 @@
 #include "List.h"
 
+
 List::List()
 {
-	_head = new City();
-	_tail = _head; 
+	_head = nullptr;
+	_tail = _head;
 }
 
 List::~List()
@@ -85,7 +86,7 @@ void List::sortedInsert(City* newNode)
 
 	curr = _head;
 	while ((curr->getNextCity() != nullptr) &&
-		  (curr->getNextCity()->getCityNumber() < newNode->getCityNumber()))
+		(curr->getNextCity()->getCityNumber() < newNode->getCityNumber()))
 	{
 		curr = curr->getNextCity();
 	}
