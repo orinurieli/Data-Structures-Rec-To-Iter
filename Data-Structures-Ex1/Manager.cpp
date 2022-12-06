@@ -50,6 +50,7 @@ int Manager::townDistanceRec(Country country, ListNode* srcCityNumber, ListNode*
 
 	// no nearby cities return -1
 	List* nearbyCities = country.getCountryStructure(srcCityNumber->getCityNum());
+	cout << "city #" << srcCityNumber->getCityNum() << "nearby cities: ";
 	nearbyCities->printList();
 
 	if (nearbyCities->getHead() == nullptr)
@@ -60,10 +61,14 @@ int Manager::townDistanceRec(Country country, ListNode* srcCityNumber, ListNode*
 		ListNode* curr = nearbyCities->getHead();
 		while (curr != NULL)
 		{
-			if (nearbyCities->getHead()->getNextCity()->getColorCity() == citiesColorsArr[0]) // white city
+			if (curr->getNextCity()->getColorCity() == citiesColorsArr[0]) // white city
 			{
-				res = townDistanceRec(country, nearbyCities->getHead()->getNextCity(), destCityNumber, citiesColorsArr);
+				res = townDistanceRec(country, curr->getNextCity(), destCityNumber, citiesColorsArr);
 				return res != -1 ? res + 1 : -1;
+			}
+			else // black city 
+			{
+				curr = curr->getNextCity();
 			}
 		}
 	}

@@ -3,7 +3,7 @@
 
 List::List()
 {
-	_head = new ListNode();
+	_head = nullptr;
 	_tail = _head;
 }
 
@@ -24,7 +24,8 @@ bool List::isEmpty()
 
 void List::sortedInsert(List* lst, ListNode* newNode)
 {
-	ListNode* curr = lst->getHead();;
+	ListNode* curr = lst->getHead();
+
 	if (newNode == nullptr) return;
 	if (curr == nullptr)
 	{
@@ -32,16 +33,13 @@ void List::sortedInsert(List* lst, ListNode* newNode)
 		lst->_tail = newNode;
 	}
 
-	// 2-->3-->4-->6
+	// 2-->3-->4-->5-->6
 	// 5
 	while (curr->getNextCity() != nullptr && curr->getNextCity()->getCityNum() < newNode->getCityNum())
 		curr = curr->getNextCity();
 
 	newNode->setNextCity(curr->getNextCity());
 	curr->setNextCity(newNode);
-
-
-	// todo
 
 }
 
