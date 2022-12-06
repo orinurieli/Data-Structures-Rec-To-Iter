@@ -36,8 +36,8 @@ public:
 
 	//int getNumberOfCities() { return _numOfCities; };
 	//int getNumberOfRoads() { return _numOfRoads; };
-	City* getSrcCityNumber() { return _srcCityNumber; }
-	City* getDestCityNumber() { return _destCityNumber; }
+	ListNode* getSrcCityNumber() { return _srcCityNumber; }
+	ListNode* getDestCityNumber() { return _destCityNumber; }
 
 	bool isValidInput(int inputUser, int from, int to); /*{ return (inputUser >= 0 && inputUser <= _country.getNumOfCities()) ? true : false; }*/
 	vector<pair<int, int>> removeDuplicates(vector<pair<int, int>> arr);
