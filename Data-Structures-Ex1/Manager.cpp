@@ -17,10 +17,8 @@ void Manager::run()
 	buildCountryStructure(); // creates an array of LinkedLists from cities
 
 	// <Recursive way>
-	//1. buildCitiesColorsArr(); [build cities color and then init all the cities in the country structure as whites]
 	res = townDistanceRec(_country, _srcCityNumber, _destCityNumber, _citiesColorsArr);
-	cout << endl << endl << "res:  " << res << endl;
-	//3. print calculated distance
+	cout << endl << endl << "Favorite Distance:  " << res << endl;
 
 	// <Iterative way>
 	//1. buildCitiesColorsArr(); [build cities color and then init all the cities in the country structure as whites]
@@ -42,6 +40,7 @@ int* Manager::buildCitiesColorsArr()
 
 int Manager::townDistanceRec(Country country, ListNode* srcCityNumber, ListNode* destCityNumber, int* citiesColorsArr)
 {
+	cout << endl << endl << "called with city #" << srcCityNumber->getCityNum() << endl << endl;
 	// turn statring city to black
 	srcCityNumber->setColorCity(citiesColorsArr[1]); // black
 
@@ -50,7 +49,7 @@ int Manager::townDistanceRec(Country country, ListNode* srcCityNumber, ListNode*
 
 	// no nearby cities return -1
 	List* nearbyCities = country.getCountryStructure(srcCityNumber->getCityNum());
-	cout << "city #" << srcCityNumber->getCityNum() << "nearby cities: ";
+	cout << endl << "city #" << srcCityNumber->getCityNum() << " nearby cities: " << endl << endl;
 	nearbyCities->printList();
 
 	if (nearbyCities->getHead() == nullptr)
@@ -61,13 +60,15 @@ int Manager::townDistanceRec(Country country, ListNode* srcCityNumber, ListNode*
 		ListNode* curr = nearbyCities->getHead();
 		while (curr != NULL)
 		{
-			if (curr->getNextCity()->getColorCity() == citiesColorsArr[0]) // white city
+			if (curr->getColorCity() == citiesColorsArr[0]) // white city // error - won't indicate first black city
 			{
-				res = townDistanceRec(country, curr->getNextCity(), destCityNumber, citiesColorsArr);
+				cout << endl << "curr send to rec: " << curr->getCityNum() << endl << endl;
+				res = townDistanceRec(country, curr, destCityNumber, citiesColorsArr);
 				return res != -1 ? res + 1 : -1;
 			}
 			else // black city 
 			{
+				cout << endl << "black city" << endl << endl;
 				curr = curr->getNextCity();
 			}
 		}
