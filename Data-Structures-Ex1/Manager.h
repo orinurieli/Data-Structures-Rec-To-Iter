@@ -15,8 +15,8 @@ class Manager
 {
 private:
 	Country _country;
-	City* _srcCityNumber;
-	City* _destCityNumber;
+	ListNode* _srcCityNumber;
+	ListNode* _destCityNumber;
 	vector<pair<int, int>> _roadLocation;
 	int* _citiesColorsArr;
 
@@ -26,8 +26,8 @@ public:
 
 	int* buildCitiesColorsArr();
 
-	int townDistanceRec(Country* country, ListNode* srcCityNumber, ListNode* destCityNumber, int* citiesColorsArr);
-	int townDistanceIter(Country* country, City* srcCityNumber, City* destCityNumber, int* citiesColorsArr);
+	int townDistanceRec(Country country, ListNode* srcCityNumber, ListNode* destCityNumber, int* citiesColorsArr);
+	int townDistanceIter(Country country, ListNode* srcCityNumber, ListNode* destCityNumber, int* citiesColorsArr);
 
 	void getinputNumberOfCitiesandRoads();
 	void getinputStartingAndEndPoint();

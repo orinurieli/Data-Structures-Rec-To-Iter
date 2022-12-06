@@ -3,12 +3,13 @@
 
 Manager::Manager()
 {
-	_srcCityNumber = new City();
-	_destCityNumber = new City();
+	_srcCityNumber = new ListNode();
+	_destCityNumber = new ListNode();
 }
 
 void Manager::run()
 {
+	int res;
 	// get all inputs & build the country structure
 	getinputNumberOfCitiesandRoads();
 	getinputStartingAndEndPoint();
@@ -17,7 +18,8 @@ void Manager::run()
 
 	// <Recursive way>
 	//1. buildCitiesColorsArr(); [build cities color and then init all the cities in the country structure as whites]
-	//2. townDistanceRec(country, _srcCityNumber, _destCityNumber/*, cities*/); [do the algorithm in recursive way]
+	res = townDistanceRec(_country, _srcCityNumber, _destCityNumber, _citiesColorsArr);
+	cout << endl << endl << "res:  " << res << endl;
 	//3. print calculated distance
 
 	// <Iterative way>
@@ -38,10 +40,10 @@ int* Manager::buildCitiesColorsArr()
 	return citiesColorsArr;
 }
 
-int Manager::townDistanceRec(Country* country, ListNode* srcCityNumber, ListNode* destCityNumber, int* citiesColorsArr)
+int Manager::townDistanceRec(Country country, ListNode* srcCityNumber, ListNode* destCityNumber, int* citiesColorsArr)
 {
 	// turn statring city to black
-	srcCityNumber->setColor(citiesColorsArr[0]); // black
+	srcCityNumber->setColorCity(citiesColorsArr[0]); // black
 
 	// if start=end return 0
 	if (srcCityNumber == destCityNumber) return 0;
@@ -55,17 +57,18 @@ int Manager::townDistanceRec(Country* country, ListNode* srcCityNumber, ListNode
 		ListNode* curr = srcCityNumber;
 		while (curr != NULL)
 		{
-			if (curr->getColor() == citiesColorsArr[1]) // white city
+			if (curr->getColorCity() == citiesColorsArr[1]) // white city
 			{
 				res = townDistanceRec(country, curr->getNextCity(), destCityNumber, citiesColorsArr);
 				return res != -1 ? res + 1 : -1;
 			}
 		}
 	}
-	return 0; //need to return value
+
+	return -1;
 }
 
-int Manager::townDistanceIter(Country* country, City* srcCityNumber, City* destCityNumber, int* citiesColorsArr)
+int Manager::townDistanceIter(Country country, ListNode* srcCityNumber, ListNode* destCityNumber, int* citiesColorsArr)
 {
 	//TODO: algorithm using stack (ADT)
 	return 0; //need to return value
