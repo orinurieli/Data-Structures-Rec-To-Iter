@@ -32,8 +32,8 @@ public:
 
 	//eColors* buildCitiesColors();
 
-	int townDistanceRec(Country* country, City* startCity, City* endCity/*, eColors* colors*/);
-	int townDistanceIter(Country* country, City* startCity, City* endCity/*, eColors* colors*/);
+	int townDistanceRec(Country* country, City* srcCityNumber, City* destCityNumber/*, eColors* colors*/);
+	int townDistanceIter(Country* country, City* srcCityNumber, City* destCityNumber/*, eColors* colors*/);
 
 	void getinputNumberOfCitiesandRoads();
 	void getinputStartingAndEndPoint();

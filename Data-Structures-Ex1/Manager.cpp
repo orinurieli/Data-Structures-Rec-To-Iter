@@ -6,7 +6,7 @@ void Manager::run()
 	getinputNumberOfCitiesandRoads();
 	getinputStartingAndEndPoint();
 	getPairsOfRoadLocation();
-	//buildCountryStructure(); // creates an array of LinkedLists from cities
+	buildCountryStructure(); // creates an array of LinkedLists from cities
 
 	// <Recursive way>
 	//1. buildCitiesColors(); [build cities color and then init all the cities in the country structure as whites]
@@ -31,27 +31,27 @@ void Manager::run()
 //	return citiesColors;
 //}
 
-int Manager::townDistanceRec(Country* country, City* startCity, City* endCity/*, eColors* colors*/) // todo use colors
+int Manager::townDistanceRec(Country* country, City* srcCityNumber, City* destCityNumber/*, eColors* colors*/) // todo use colors
 {
 	// turn statring city to black
-	startCity->setColor(0); // black
+	srcCityNumber->setColor(0); // black
 
 	// if start=end return 0
-	if (startCity == endCity) return 0;
+	if (srcCityNumber == destCityNumber) return 0;
 
 	// no nearby cities return -1
-	List* list = startCity->getNearbyCities();
-	if (startCity->getNearbyCities()->getHead() == NULL)
+	List* list = srcCityNumber->getNearbyCities();
+	if (srcCityNumber->getNearbyCities()->getHead() == NULL)
 		return -1;
 	else // we have nearby cities 
 	{
 		int res;
-		City* curr = startCity->getNearbyCities()->getHead();
+		City* curr = srcCityNumber->getNearbyCities()->getHead();
 		while (curr != NULL)
 		{
 			if (curr->getColor() == 1) // white city
 			{
-				res = townDistanceRec(country, curr->getNextCity(), endCity/*, colors*/);
+				res = townDistanceRec(country, curr->getNextCity(), destCityNumber/*, colors*/);
 				return res != -1 ? res + 1 : -1;
 			}
 		}
@@ -97,13 +97,13 @@ void Manager::getinputStartingAndEndPoint()
 	cout << "(between 1 to " << _country.getNumOfCities() << "): ";
 	cin >> srcCityNumber;
 	//TODO: check input
-	_srcCityNumber->setCityNumber(srcCityNumber);
+	//_srcCityNumber->setCityNumber(srcCityNumber);
 
 	cout << "Enter number of destination city ";
 	cout << "(between 1 to " << _country.getNumOfCities() << "): ";
 	cin >> destCityNumber;
 	//TODO: check input
-	_destCityNumber->setCityNumber(destCityNumber);
+	//_destCityNumber->setCityNumber(destCityNumber);
 }
 
 void Manager::getPairsOfRoadLocation()

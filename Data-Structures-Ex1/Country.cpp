@@ -34,6 +34,11 @@ int Country::getNumOfRoads() const
 	return _numOfRoads;
 }
 
+City* Country::getCountryStructure(int cityNum) const
+{
+	return &(this->_countryStructure[cityNum]);
+}
+
 void Country::initCountryStructure()
 {
 	_countryStructure = new City[_numOfCities];
@@ -58,9 +63,4 @@ void Country::fillCountryStructure(vector<pair<int, int>> roadLocation)
 		_countryStructure[firstCityNumber - 1].insertNearbyCitiesToSortedList(nearbyCityToFirst);
 		_countryStructure[secondCityNumber - 1].insertNearbyCitiesToSortedList(nearbyCityToSecond);
 	}
-}
-
-City* Country::getCountryStructure(int cityNum) const
-{
-	return &(this->_countryStructure[cityNum]);
 }
