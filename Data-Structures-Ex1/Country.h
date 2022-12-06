@@ -11,7 +11,7 @@ class Country
 private:
 	int _numOfCities;
 	int _numOfRoads;
-	City* _countryStructure; // City1 --> City2 -->
+	City* _countryStructure;
 
 public:
 	Country();

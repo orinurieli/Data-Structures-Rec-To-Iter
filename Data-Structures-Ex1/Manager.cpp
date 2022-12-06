@@ -1,5 +1,6 @@
 #include "Manager.h"
 
+
 Manager::Manager()
 {
 	_srcCityNumber = new City();
@@ -85,13 +86,14 @@ void Manager::getinputNumberOfCitiesandRoads()
 
 	cout << "Insert number of cities: ";
 	cin >> numberOfCities;
-	//TODO: check input
+
 	_country.setNumOfCities(numberOfCities);
 
 	cout << "Insert number of roads: ";
 	cin >> numberOfRoads;
-	//TODO: check input
+
 	_country.setNumOfRoads(numberOfRoads);
+
 }
 
 void Manager::getinputStartingAndEndPoint()
@@ -111,7 +113,7 @@ void Manager::getinputStartingAndEndPoint()
 	cout << "Enter number of destination city ";
 	cout << "(between 1 to " << _country.getNumOfCities() << "): ";
 	cin >> destCityNumber;
-	//TODO: check input
+
 	if (isValidInput(destCityNumber, 1, _country.getNumOfCities()))
 	{
 		_destCityNumber->setCityNumber(destCityNumber);
@@ -123,17 +125,35 @@ void Manager::getPairsOfRoadLocation()
 	int road1, road2;
 	cout << "please enter " << _country.getNumOfRoads() << " pairs of roads: ";
 
-	for (int i = 0; i < _country.getNumOfCities(); i++)
+	for (int i = 0; i < _country.getNumOfRoads(); i++)
 	{
 		cin >> road1;
 		cin >> road2;
-		//TODO: check input
+
+		_roadLocation.resize(_country.getNumOfRoads());
 		_roadLocation[i].first = road1;
 		_roadLocation[i].second = road2;
 	}
+
+	_roadLocation = removeDuplicates(_roadLocation);
 }
 
 bool Manager::isValidInput(int inputUser, int from, int to)
 {
 	return inputUser >= from && inputUser <= to;
+}
+
+vector<pair<int, int>> Manager::removeDuplicates(vector<pair<int, int>> arr)
+{
+	for (int i = 0; i < arr.size(); i++)
+	{
+		for (int j = i + 1; j < arr.size(); j++)
+		{
+			if (arr[i].first == arr[j].first && arr[i].second == arr[j].second)
+			{
+				arr.erase(arr.begin() + i);
+			}
+		}
+	}
+	return arr;
 }
