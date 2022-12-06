@@ -35,7 +35,17 @@ void List::sortedInsert(ListNode* newNode)
 		_head = newNode;
 	}
 
-	
+	curr = _head;
+	while ((curr->getNextCity() != nullptr) &&
+		(curr->getNextCity()->getCityNum() < newNode->getCityNum()))
+	{
+		curr = curr->getNextCity();
+	}
+
+	ListNode* nextCity = newNode->getNextCity();
+	nextCity = curr->getNextCity();
+	ListNode* temp = curr->getNextCity();
+	temp = newNode;
 }
 
 

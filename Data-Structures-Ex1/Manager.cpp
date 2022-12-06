@@ -43,23 +43,26 @@ int* Manager::buildCitiesColorsArr()
 int Manager::townDistanceRec(Country country, ListNode* srcCityNumber, ListNode* destCityNumber, int* citiesColorsArr)
 {
 	// turn statring city to black
-	srcCityNumber->setColorCity(citiesColorsArr[0]); // black
+	srcCityNumber->setColorCity(citiesColorsArr[1]); // black
 
 	// if start=end return 0
-	if (srcCityNumber == destCityNumber) return 0;
+	if (srcCityNumber->getCityNum() == destCityNumber->getCityNum()) return 0;
 
 	// no nearby cities return -1
-	if (srcCityNumber->getNextCity() == NULL)
+	List* nearbyCities = country.getCountryStructure(srcCityNumber->getCityNum());
+	nearbyCities->printList();
+
+	if (nearbyCities->getHead() == nullptr)
 		return -1;
 	else // we have nearby cities 
 	{
 		int res;
-		ListNode* curr = srcCityNumber;
+		ListNode* curr = nearbyCities->getHead();
 		while (curr != NULL)
 		{
-			if (curr->getColorCity() == citiesColorsArr[1]) // white city
+			if (nearbyCities->getHead()->getNextCity()->getColorCity() == citiesColorsArr[0]) // white city
 			{
-				res = townDistanceRec(country, curr->getNextCity(), destCityNumber, citiesColorsArr);
+				res = townDistanceRec(country, nearbyCities->getHead()->getNextCity(), destCityNumber, citiesColorsArr);
 				return res != -1 ? res + 1 : -1;
 			}
 		}

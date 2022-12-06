@@ -4,14 +4,14 @@ Country::Country()
 {
 	_numOfCities = 0;
 	_numOfRoads = 0;
-	_countryStructure = nullptr;
+	_countryStructure.resize(0);
 }
 
 Country::Country(int numOfCities, int numOfRoads)
 {
 	_numOfCities = numOfCities;
 	_numOfRoads = numOfRoads;
-	_countryStructure = new City[numOfCities];
+	_countryStructure.resize(numOfCities);
 }
 
 void Country::setNumOfCities(int numOfCities)
@@ -34,14 +34,14 @@ int Country::getNumOfRoads() const
 	return _numOfRoads;
 }
 
-City* Country::getCountryStructure(int cityNum) const
+List* Country::getCountryStructure(int cityNum) const
 {
-	return &(this->_countryStructure[cityNum]);
+	return _countryStructure[cityNum].getNearbyCities();
 }
 
 void Country::initCountryStructure()
 {
-	_countryStructure = new City[_numOfCities];
+	_countryStructure.resize(_numOfCities);
 
 	for (int i = 0; i < _numOfCities; i++)
 	{
