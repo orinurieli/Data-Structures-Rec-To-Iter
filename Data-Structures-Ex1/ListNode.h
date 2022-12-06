@@ -13,5 +13,6 @@ public:
 	int getColorCity() const { return _colorCity; }
 	void setCityNum(int cityNum) { _cityNum = cityNum; }
 	int getCityNum() const { return _cityNum; }
+	void setNextCity(ListNode* nextCity) { _nextCity = nextCity; }
 	ListNode* getNextCity() const { return _nextCity; }
 };
