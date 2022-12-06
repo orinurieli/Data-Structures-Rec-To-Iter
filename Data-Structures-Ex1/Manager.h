@@ -23,17 +23,17 @@ private:
 	City* _srcCityNumber;
 	City* _destCityNumber;
 	vector<pair<int, int>> _roadLocation;
-	//eColors* _cityColor; // colors = [{color: white, num: 0}, {color: black, num: 1} ] 
+	int* _citiesColorsArr;
 	//int _numOfCities;
 	//int _numOfRoads;
 
 public:
 	void run();
 
-	//eColors* buildCitiesColors();
+	int* buildCitiesColorsArr();
 
-	int townDistanceRec(Country* country, City* srcCityNumber, City* destCityNumber/*, eColors* colors*/);
-	int townDistanceIter(Country* country, City* srcCityNumber, City* destCityNumber/*, eColors* colors*/);
+	int townDistanceRec(Country* country, City* srcCityNumber, City* destCityNumber, int* citiesColorsArr);
+	int townDistanceIter(Country* country, City* srcCityNumber, City* destCityNumber, int* citiesColorsArr);
 
 	void getinputNumberOfCitiesandRoads();
 	void getinputStartingAndEndPoint();
