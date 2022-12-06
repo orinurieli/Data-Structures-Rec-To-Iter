@@ -4,7 +4,7 @@
 List::List()
 {
 	_head = new ListNode();
-	_tail = _head; 
+	_tail = _head;
 }
 
 List::~List()
@@ -24,7 +24,7 @@ bool List::isEmpty()
 
 void List::sortedInsert(ListNode* newNode)
 {
-	ListNode *curr;
+	ListNode* curr;
 
 	if ((_head == nullptr) || (_head->getCityNum() >= newNode->getCityNum()))
 	{
@@ -34,7 +34,7 @@ void List::sortedInsert(ListNode* newNode)
 
 	curr = _head;
 	while ((curr->getNextCity() != nullptr) &&
-		  (curr->getNextCity()->getCityNum() < newNode->getCityNum()))
+		(curr->getNextCity()->getCityNum() < newNode->getCityNum()))
 	{
 		curr = curr->getNextCity();
 	}
@@ -42,21 +42,21 @@ void List::sortedInsert(ListNode* newNode)
 	//curr->getNextCity() = newNode;
 }
 
-//
-//void List::printList()
-//{
-//	City* curr = _head;
-//
-//	if (isEmpty()) {
-//		cout << "List empty" << endl;
-//		return;
-//	}
-//
-//	while (curr != nullptr) {
-//		cout << curr->_cityNum << " ";
-//		curr = curr->_next;
-//	}
-//}
+
+void List::printList()
+{
+	ListNode* curr = _head;
+
+	if (isEmpty()) {
+		cout << "List empty" << endl;
+		return;
+	}
+
+	while (curr != nullptr) {
+		cout << curr->getCityNum() << " ";
+		curr = curr->getNextCity();
+	}
+}
 
 ListNode* List::getHead() const
 {
