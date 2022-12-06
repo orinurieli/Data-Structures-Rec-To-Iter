@@ -7,7 +7,7 @@ private:
 	int _colorCity = 1; // WHITE
 	ListNode* _nextCity;
 public:
-	ListNode();
+	//ListNode();
 	ListNode(int cityNum, ListNode* nextCity = nullptr);
 	void setColorCity(int colorCity) { _colorCity = colorCity; }
 	int getColorCity() const { return _colorCity; }
