@@ -38,25 +38,24 @@ int* Manager::buildCitiesColorsArr()
 	return citiesColorsArr;
 }
 
-int Manager::townDistanceRec(Country* country, City* srcCityNumber, City* destCityNumber, int* citiesColorsArr)
+int Manager::townDistanceRec(Country* country, ListNode* srcCityNumber, ListNode* destCityNumber, int* citiesColorsArr)
 {
 	// turn statring city to black
-	srcCityNumber->setColor(0); // black
+	srcCityNumber->setColor(citiesColorsArr[0]); // black
 
 	// if start=end return 0
 	if (srcCityNumber == destCityNumber) return 0;
 
 	// no nearby cities return -1
-	List* list = srcCityNumber->getNearbyCities();
-	if (srcCityNumber->getNearbyCities()->getHead() == NULL)
+	if (srcCityNumber->getNextCity() == NULL)
 		return -1;
 	else // we have nearby cities 
 	{
 		int res;
-		City* curr = srcCityNumber->getNearbyCities()->getHead();
+		ListNode* curr = srcCityNumber;
 		while (curr != NULL)
 		{
-			if (curr->getColor() == 1) // white city
+			if (curr->getColor() == citiesColorsArr[1]) // white city
 			{
 				res = townDistanceRec(country, curr->getNextCity(), destCityNumber, citiesColorsArr);
 				return res != -1 ? res + 1 : -1;
@@ -107,7 +106,7 @@ void Manager::getinputStartingAndEndPoint()
 
 	if (isValidInput(srcCityNumber, 1, _country.getNumOfCities()))
 	{
-		_srcCityNumber->setCityNumber(srcCityNumber);
+		_srcCityNumber->setCityNum(srcCityNumber);
 	}
 
 	cout << "Enter number of destination city ";
@@ -116,7 +115,7 @@ void Manager::getinputStartingAndEndPoint()
 
 	if (isValidInput(destCityNumber, 1, _country.getNumOfCities()))
 	{
-		_destCityNumber->setCityNumber(destCityNumber);
+		_destCityNumber->setCityNum(destCityNumber);
 	}
 }
 

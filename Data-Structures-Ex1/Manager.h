@@ -26,7 +26,7 @@ public:
 
 	int* buildCitiesColorsArr();
 
-	int townDistanceRec(Country* country, City* srcCityNumber, City* destCityNumber, int* citiesColorsArr);
+	int townDistanceRec(Country* country, ListNode* srcCityNumber, ListNode* destCityNumber, int* citiesColorsArr);
 	int townDistanceIter(Country* country, City* srcCityNumber, City* destCityNumber, int* citiesColorsArr);
 
 	void getinputNumberOfCitiesandRoads();
