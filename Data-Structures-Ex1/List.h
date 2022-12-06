@@ -15,7 +15,7 @@ public:
 	~List();
 	void makeEmpty();
 	bool isEmpty();
-	void sortedInsert(ListNode* newCity);
+	void sortedInsert(List* lst, ListNode* newCity);
 	void deleteNode(int node);
 	ListNode* getHead() const;
 	ListNode* getTail() const;

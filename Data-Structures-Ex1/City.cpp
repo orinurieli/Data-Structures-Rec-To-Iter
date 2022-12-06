@@ -42,5 +42,5 @@ List* City::getNearbyCities() const
 
 void City::insertNearbyCitiesToSortedList(ListNode* nearbyCity)
 {
-	_nearbyCities->sortedInsert(nearbyCity);
+	_nearbyCities->sortedInsert(_nearbyCities, nearbyCity);
 }

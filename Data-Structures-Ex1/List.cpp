@@ -22,20 +22,27 @@ bool List::isEmpty()
 	return _head == nullptr ? true : false;
 }
 
-void List::sortedInsert(ListNode* newNode)
+void List::sortedInsert(List* lst, ListNode* newNode)
 {
+	ListNode* curr = lst->getHead();;
 	if (newNode == nullptr) return;
-
-	ListNode* curr;
-
-	if ((_head == nullptr) || (_head->getCityNum() >= newNode->getCityNum()))
+	if (curr == nullptr)
 	{
-		ListNode* nextCity = newNode->getNextCity();
-		nextCity = _head;
-		_head = newNode;
+		lst->_head = newNode;
+		lst->_tail = newNode;
 	}
 
-	
+	// 2-->3-->4-->6
+	// 5
+	while (curr->getNextCity() != nullptr && curr->getNextCity()->getCityNum() < newNode->getCityNum())
+		curr = curr->getNextCity();
+
+	newNode->setNextCity(curr->getNextCity());
+	curr->setNextCity(newNode);
+
+
+	// todo
+
 }
 
 
