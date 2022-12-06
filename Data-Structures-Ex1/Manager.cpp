@@ -51,7 +51,7 @@ int Manager::townDistanceRec(Country* country, City* srcCityNumber, City* destCi
 		{
 			if (curr->getColor() == 1) // white city
 			{
-				res = townDistanceRec(country, curr->getNextCity(), destCityNumber/*, colors*/);
+				res = townDistanceRec(country, curr->getNextCity(), destCityNumber, citiesColorsArr);
 				return res != -1 ? res + 1 : -1;
 			}
 		}
