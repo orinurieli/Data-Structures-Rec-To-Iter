@@ -6,7 +6,7 @@ void Manager::run()
 	getinputNumberOfCitiesandRoads();
 	getinputStartingAndEndPoint();
 	getPairsOfRoadLocation();
-	buildCountryStructure(); // creates an array of LinkedLists from cities
+	//buildCountryStructure(); // creates an array of LinkedLists from cities
 
 	// <Recursive way>
 	//1. buildCitiesColors(); [build cities color and then init all the cities in the country structure as whites]
@@ -109,7 +109,7 @@ void Manager::getinputStartingAndEndPoint()
 void Manager::getPairsOfRoadLocation()
 {
 	int road1, road2;
-	cout << "please enter " << _numOfRoads << " pairs of roads: ";
+	cout << "please enter " << _country.getNumOfRoads() << " pairs of roads: ";
 
 	for (int i = 0; i < _country.getNumOfCities(); i++)
 	{

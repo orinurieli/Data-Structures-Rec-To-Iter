@@ -37,22 +37,11 @@ public:
 
 	void getinputNumberOfCitiesandRoads();
 	void getinputStartingAndEndPoint();
-
-	int getNumberOfCities() { return _numOfCities; };
-	int getNumberOfRoads() { return _numOfRoads; };
-	City* getStartingPoint() { return _startingPoint; };
-	City* getEndPoint() { return _endPoint; };
-
 	void getPairsOfRoadLocation();
+	void buildCountryStructure();
 
-	bool isValid(int input) { return (input >= 0 && input <= _numOfCities) ? true : false; };
-
-	eColors* buildCitiesColors();
-	Country* buildCountry(eColors* cities);
-
-	int townDistanceRec(Country* country, City* startCity, City* endCity, eColors* colors);
-	void townDistanceIter(Country* country, City* startCity, City* endCity, eColors* colors);
-
+	//int getNumberOfCities() { return _numOfCities; };
+	//int getNumberOfRoads() { return _numOfRoads; };
 	City* getSrcCityNumber() { return _srcCityNumber; }
 	City* getDestCityNumber() { return _destCityNumber; }
 

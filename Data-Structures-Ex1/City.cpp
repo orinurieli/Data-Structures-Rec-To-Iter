@@ -1,21 +1,20 @@
 #pragma once
-
 #include "City.h"
 
-City::City()
-{
-	_cityNum = 0;
-	_color = 1; 
-	_nearbyCities = new List;
-	_nextCity = nullptr;
-}
+//City::City()
+//{
+//	_nearbyCities = new List;
+//	_nextCity = nullptr;
+//	_cityNum = 0;
+//	_color = 1; 
+//}
 
 City::City(int cityNum, City* nextCity)
 {
-	_cityNum = cityNum;
-	_nextCity = nextCity;
-	_color = 1; // todo change to array [0,1]
 	_nearbyCities = new List;
+	_nextCity = nextCity;
+	_cityNum = cityNum;
+	_color = 1; // todo change to array [0,1]
 }
 
 void City::setColor(int color)

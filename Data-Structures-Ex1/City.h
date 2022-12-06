@@ -12,6 +12,7 @@ private:
 	City* _nextCity;
 
 public:
+	//City();
 	City(int cityNum = 0, City* nextCity = nullptr);
 	void setCityNumber(int cityNum);
 	void setColor(int color);
