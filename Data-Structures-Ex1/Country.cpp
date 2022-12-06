@@ -45,7 +45,7 @@ void Country::initCountryStructure()
 
 	for (int i = 0; i < _numOfCities; i++)
 	{
-		_countryStructure[i].setCityNumber(i + 1);
+		_countryStructure[i].setCityNum(i + 1);
 	}
 }
 
@@ -59,8 +59,8 @@ void Country::fillCountryStructure(vector<pair<int, int>> roadLocation)
 		secondCityNumber = roadLocation[i].second;
 
 		//TODO: check input
-		City* nearbyCityToFirst = new City(secondCityNumber);
-		City* nearbyCityToSecond = new City(firstCityNumber);
+		ListNode* nearbyCityToFirst = new ListNode(secondCityNumber);
+		ListNode* nearbyCityToSecond = new ListNode(firstCityNumber);
 		_countryStructure[firstCityNumber - 1].insertNearbyCitiesToSortedList(nearbyCityToFirst);
 		_countryStructure[secondCityNumber - 1].insertNearbyCitiesToSortedList(nearbyCityToSecond);
 	}

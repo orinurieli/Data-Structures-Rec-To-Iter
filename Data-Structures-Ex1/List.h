@@ -1,25 +1,23 @@
 #pragma once
 #include <iostream>
-#include "City.h"
-
-class City;
+#include "ListNode.h"
 
 using namespace std;
 
 class List
 {
 private:
-	City* _head;
-	City* _tail;
+	ListNode* _head;
+	ListNode* _tail;
 
 public:
 	List();
 	~List();
 	void makeEmpty();
 	bool isEmpty();
-	void sortedInsert(City* newCity);
+	void sortedInsert(ListNode* newCity);
 	void deleteNode(int node);
-	City* getHead() const;
-	City* getTail() const;
+	ListNode* getHead() const;
+	ListNode* getTail() const;
 	void printList();
 };
