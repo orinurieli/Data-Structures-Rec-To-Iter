@@ -3,7 +3,7 @@
 
 List::List()
 {
-	_head = new ListNode();
+	_head = nullptr;
 	_tail = _head;
 }
 
