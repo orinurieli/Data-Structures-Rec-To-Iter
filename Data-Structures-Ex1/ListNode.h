@@ -11,6 +11,7 @@ public:
 	ListNode(int cityNum, ListNode* nextCity = nullptr);
 	void setColorCity(int colorCity) { _colorCity = colorCity; }
 	int getColorCity() const { return _colorCity; }
+	void setCityNum(int cityNum) { _cityNum = cityNum; }
 	int getCityNum() const { return _cityNum; }
 	ListNode* getNextCity() const { return _nextCity; }
 };
