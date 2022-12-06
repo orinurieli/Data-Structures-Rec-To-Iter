@@ -1,5 +1,14 @@
 #pragma once
+
 #include "City.h"
+
+City::City()
+{
+	_cityNum = 0;
+	_color = 1; 
+	_nearbyCities = new List;
+	_nextCity = nullptr;
+}
 
 City::City(int cityNum, City* nextCity)
 {

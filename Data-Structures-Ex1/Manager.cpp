@@ -109,6 +109,7 @@ void Manager::getinputStartingAndEndPoint()
 void Manager::getPairsOfRoadLocation()
 {
 	int road1, road2;
+	cout << "please enter " << _numOfRoads << " pairs of roads: ";
 
 	for (int i = 0; i < _country.getNumOfCities(); i++)
 	{
