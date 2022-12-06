@@ -107,7 +107,7 @@ void Manager::getinputStartingAndEndPoint()
 
 	if (isValidInput(srcCityNumber, 1, _country.getNumOfCities()))
 	{
-		_srcCityNumber->setCityNumber(srcCityNumber);
+		_srcCityNumber->setCityNum(srcCityNumber);
 	}
 
 	cout << "Enter number of destination city ";
@@ -116,7 +116,7 @@ void Manager::getinputStartingAndEndPoint()
 
 	if (isValidInput(destCityNumber, 1, _country.getNumOfCities()))
 	{
-		_destCityNumber->setCityNumber(destCityNumber);
+		_destCityNumber->setCityNum(destCityNumber);
 	}
 }
 
