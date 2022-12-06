@@ -1,32 +1,45 @@
 #pragma once
 #include "City.h"
-#include "List.h"
-
 
 City::City(int cityNum, City* nextCity)
 {
 	_cityNum = cityNum;
+	_nextCity = nextCity;
 	_color = 1; // todo change to array [0,1]
 	_nearbyCities = new List;
-	_nextCity = nextCity;
+}
+
+void City::setColor(int color)
+{
+	_color = color;
+}
+
+int City::getColor() const
+{
+	return _color;
 }
 
 void City::setCityNumber(int cityNum)
 {
-	this->_cityNum = cityNum;
+	_cityNum = cityNum;
 }
 
 int City::getCityNumber() const
 {
-	return this->_cityNum;
+	return _cityNum;
+}
+
+City* City::getNextCity()
+{
+	return _nextCity;
 }
 
 List* City::getNearbyCities() const
 {
-	return this->_nearbyCities;
+	return _nearbyCities;
 }
 
-//void City::insertNearbyCitiesToSortedList(City* nearbyCity)
-//{
-//	_nearbyCities->sortedInsert(nearbyCity);
-//}
+void City::insertNearbyCitiesToSortedList(City* nearbyCity)
+{
+	_nearbyCities->sortedInsert(nearbyCity);
+}

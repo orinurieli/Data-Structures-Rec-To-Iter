@@ -1,12 +1,9 @@
-#include <iostream>
 #include "List.h"
-
 
 List::List()
 {
-	City* city = new City(0, NULL);
-	_head = city;
-	_tail = _head; // todo dummy head
+	_head = new City();
+	_tail = _head; 
 }
 
 List::~List()
@@ -16,7 +13,7 @@ List::~List()
 
 void List::makeEmpty()
 {
-
+	_head = _tail = nullptr;
 }
 
 bool List::isEmpty()
@@ -76,27 +73,26 @@ bool List::isEmpty()
 //	delete temp1;
 //}
 
-//void List::sortedInsert(City* newNode)
-//{
-//	// Create the new Node.
-//	City* newNode = new City(data, nullptr);
-//
-//	if ((_head == nullptr) || (_head->getCityNumber() >= newNode->getCityNumber()))
-//	{
-//		newNode->getNext() = _head;
-//		_head = newNode;
-//	}
-//
-//	// Traverse till end of list
-//	City* temp = _head;
-//	while (temp->getNext() != NULL) {
-//		// Update temp
-//		temp = temp->getNext();
-//	}
-//
-//	// Insert at the last
-//	temp->getNext() = newNode;
-//}
+void List::sortedInsert(City* newNode)
+{
+	City* curr;
+
+	if ((_head == nullptr) || (_head->getCityNumber() >= newNode->getCityNumber()))
+	{
+		//newNode->getNextCity() = _head; 
+		_head = newNode;
+	}
+
+	curr = _head;
+	while ((curr->getNextCity() != nullptr) &&
+		  (curr->getNextCity()->getCityNumber() < newNode->getCityNumber()))
+	{
+		curr = curr->getNextCity();
+	}
+	//*newNode->getNextCity() = curr->getNextCity();
+	//curr->getNextCity() = newNode;
+}
+
 //
 //void List::printList()
 //{

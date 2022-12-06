@@ -2,7 +2,6 @@
 #include <iostream>
 #include "City.h"
 
-
 class City;
 
 using namespace std;
@@ -18,11 +17,9 @@ public:
 	~List();
 	void makeEmpty();
 	bool isEmpty();
-	//void sortedInsert(City* newCity);
-	//void deleteNode(int node);
-
+	void sortedInsert(City* newCity);
+	void deleteNode(int node);
 	City* getHead() const;
 	City* getTail() const;
-
 	void printList();
 };

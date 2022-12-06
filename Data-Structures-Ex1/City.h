@@ -1,4 +1,5 @@
 #pragma once
+#include "List.h"
 
 class List;
 
@@ -12,14 +13,11 @@ private:
 
 public:
 	City(int cityNum = 0, City* nextCity = nullptr);
-
 	void setCityNumber(int cityNum);
-	void setColor(int binary) { _color = binary; }
-
-	int getColor() { return _color; }
+	void setColor(int color);
+	int getColor() const; 
 	int getCityNumber() const;
-	City* getNext() const { return _nextCity; }
+	City* getNextCity();
 	List* getNearbyCities() const;
-
 	void insertNearbyCitiesToSortedList(City* nearbyCity);
 };
