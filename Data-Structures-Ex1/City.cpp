@@ -42,16 +42,5 @@ List* City::getNearbyCities() const
 
 void City::insertNearbyCitiesToSortedList(ListNode* nearbyCity)
 {
-	cout << endl << "for city #" << _cityNum << endl;
-	//cout << endl << "insert node" << nearbyCity->getCityNum() << " to city " << _cityNum << endl;
-	cout << "before insert: " << endl;
-	_nearbyCities->printList();
-	cout << endl << endl;
-
 	_nearbyCities->sortedInsert(_nearbyCities, nearbyCity);
-
-	cout << "after insert: " << endl;
-	_nearbyCities->printList();
-	cout << endl << endl;
-
 }

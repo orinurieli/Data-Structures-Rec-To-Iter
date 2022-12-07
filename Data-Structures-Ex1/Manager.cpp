@@ -32,7 +32,7 @@ int* Manager::buildCitiesColorsArr()
 
 	for (int i = 0; i < _country.getNumOfCities(); i++)
 	{
-		citiesColorsArr[i] = 1; // WHITE = 1, BLACK = 0
+		citiesColorsArr[i] = 0; // WHITE = 0, BLACK = 1
 	}
 
 	return citiesColorsArr;
@@ -40,17 +40,18 @@ int* Manager::buildCitiesColorsArr()
 
 int Manager::townDistanceRec(Country country, ListNode* srcCityNumber, ListNode* destCityNumber, int* citiesColorsArr)
 {
-	cout << endl << endl << "called with city #" << srcCityNumber->getCityNum() << endl << endl;
+	cout << endl << endl << "called with city #" << srcCityNumber->getCityNum() << "color: " << srcCityNumber->getColorCity() << endl << endl;
 	// turn statring city to black
-	srcCityNumber->setColorCity(citiesColorsArr[1]); // black
+	srcCityNumber->setColorCity(citiesColorsArr[1]); // color[0]=white, color[1]=black
 
 	// if start=end return 0
 	if (srcCityNumber->getCityNum() == destCityNumber->getCityNum()) return 0;
 
 	// no nearby cities return -1
 	List* nearbyCities = country.getCountryStructure(srcCityNumber->getCityNum());
-	cout << endl << "city #" << srcCityNumber->getCityNum() << " nearby cities: " << endl << endl;
+	cout << endl << "city #" << srcCityNumber->getCityNum() << " nearby cities: " << endl;
 	nearbyCities->printList();
+	cout << endl << endl;
 
 	if (nearbyCities->getHead() == nullptr)
 		return -1;
