@@ -26,17 +26,17 @@ void Manager::run()
 	//3. print calculated distance
 }
 
-int* Manager::buildCitiesColorsArr()
-{
-	int* citiesColorsArr = new int[_country.getNumOfCities()];
-
-	for (int i = 0; i < _country.getNumOfCities(); i++)
-	{
-		citiesColorsArr[i] = 1; // WHITE = 1, BLACK = 0
-	}
-
-	return citiesColorsArr;
-}
+//int* Manager::buildCitiesColorsArr()
+//{
+//	int* citiesColorsArr = new int[_country.getNumOfCities()];
+//
+//	for (int i = 0; i < _country.getNumOfCities(); i++)
+//	{
+//		citiesColorsArr[i] = 1; // WHITE = 1, BLACK = 0
+//	}
+//
+//	return citiesColorsArr;
+//}
 
 int Manager::townDistanceRec(Country country, ListNode* srcCityNumber, ListNode* destCityNumber, int* citiesColorsArr)
 {
