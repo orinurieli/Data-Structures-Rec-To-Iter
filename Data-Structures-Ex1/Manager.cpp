@@ -26,7 +26,6 @@ void Manager::run()
 	//3. print calculated distance
 }
 
-<<<<<<< HEAD
 //int* Manager::buildCitiesColorsArr()
 //{
 //	int* citiesColorsArr = new int[_country.getNumOfCities()];
@@ -38,19 +37,6 @@ void Manager::run()
 //
 //	return citiesColorsArr;
 //}
-=======
-int* Manager::buildCitiesColorsArr()
-{
-	int* citiesColorsArr = new int[_country.getNumOfCities()];
-
-	for (int i = 0; i < _country.getNumOfCities(); i++)
-	{
-		citiesColorsArr[i] = 0; // WHITE = 0, BLACK = 1
-	}
-
-	return citiesColorsArr;
-}
->>>>>>> 9f8ce62b6a3d167d2f19688ad20d6edb1b7626d8
 
 int Manager::townDistanceRec(Country country, ListNode* srcCityNumber, ListNode* destCityNumber, int* citiesColorsArr)
 {
@@ -73,16 +59,11 @@ int Manager::townDistanceRec(Country country, ListNode* srcCityNumber, ListNode*
 	else // we have nearby cities 
 	{
 		int res;
-<<<<<<< HEAD
 		while (curr->getColorCity() == citiesColorsArr[1])
 			curr = curr->getNextCity();
 
 		curr->setColorCity(citiesColorsArr[1]);
 
-=======
-		ListNode* curr = nearbyCities->getHead();
-		//curr->setColorCity(citiesColorsArr[1]);
->>>>>>> 9f8ce62b6a3d167d2f19688ad20d6edb1b7626d8
 		while (curr != NULL)
 		{
 			if (curr->getColorCity() == citiesColorsArr[0]) // white city 
