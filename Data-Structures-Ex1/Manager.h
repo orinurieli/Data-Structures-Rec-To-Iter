@@ -18,7 +18,7 @@ private:
 	ListNode* _srcCityNumber;
 	ListNode* _destCityNumber;
 	vector<pair<int, int>> _roadLocation;
-	int _citiesColorsArr[2] = { 1 , 0 };
+	int _citiesColorsArr[2] = { 0 , 1 };
 
 public:
 	Manager();
