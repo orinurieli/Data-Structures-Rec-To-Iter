@@ -34,9 +34,9 @@ int Country::getNumOfRoads() const
 	return _numOfRoads;
 }
 
-List* Country::getCountryStructure(int cityNum) const
+List Country::getCountryStructure(int cityNum) const
 {
-	return _countryStructure[cityNum - 1].getNearbyCities();
+	return _countryStructure[cityNum - 1];
 }
 
 void Country::initCountryStructure()
@@ -45,7 +45,7 @@ void Country::initCountryStructure()
 
 	for (int i = 0; i < _numOfCities; i++)
 	{
-		_countryStructure[i].setCityNum(i + 1);
+		_countryStructure[i].setHead(new ListNode(i + 1));
 	}
 }
 
