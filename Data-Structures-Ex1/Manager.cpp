@@ -58,6 +58,7 @@ int Manager::townDistanceRec(Country country, ListNode* srcCityNumber, ListNode*
 	{
 		int res;
 		ListNode* curr = nearbyCities->getHead();
+		//curr->setColorCity(citiesColorsArr[1]);
 		while (curr != NULL)
 		{
 			if (curr->getColorCity() == citiesColorsArr[0]) // white city // error - won't indicate first black city

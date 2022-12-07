@@ -26,18 +26,22 @@ void List::sortedInsert(List* lst, ListNode* newNode)
 {
 	ListNode* curr = lst->getHead();
 
-	// null-->
-	// 2
 	if (newNode == nullptr) return;
 	if (curr == nullptr)
 	{
 		curr = newNode;
-		lst->setHead(curr); // 2
+		lst->setHead(curr);
 		curr->setNextCity(nullptr);
 		return;
 	}
 
-	// 1-->3
+	if (curr->getNextCity() == nullptr && curr->getCityNum() > newNode->getCityNum()) {
+		newNode->setNextCity(curr);
+		curr->setNextCity(nullptr);
+		lst->setHead(newNode);
+		return;
+	}
+
 	while (curr->getNextCity() != nullptr && curr->getNextCity()->getCityNum() < newNode->getCityNum())
 		curr = curr->getNextCity();
 

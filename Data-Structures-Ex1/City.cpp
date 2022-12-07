@@ -12,7 +12,7 @@ City::City(int cityNum, City* nextCity)
 {
 	_cityNum = cityNum;
 	_nearbyCities = new List;
-	_color = 1; // todo change to array [0,1]
+	_color = 1;
 }
 
 void City::setColor(int color)
@@ -42,6 +42,16 @@ List* City::getNearbyCities() const
 
 void City::insertNearbyCitiesToSortedList(ListNode* nearbyCity)
 {
-	cout << endl << "insert node" << nearbyCity->getCityNum() << " to city " << _cityNum << endl;
+	cout << endl << "for city #" << _cityNum << endl;
+	//cout << endl << "insert node" << nearbyCity->getCityNum() << " to city " << _cityNum << endl;
+	cout << "before insert: " << endl;
+	_nearbyCities->printList();
+	cout << endl << endl;
+
 	_nearbyCities->sortedInsert(_nearbyCities, nearbyCity);
+
+	cout << "after insert: " << endl;
+	_nearbyCities->printList();
+	cout << endl << endl;
+
 }
