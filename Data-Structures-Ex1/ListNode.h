@@ -4,7 +4,7 @@ class ListNode
 {
 private:
 	int _cityNum;
-	int _colorCity = 1; // WHITE
+	int _colorCity = 0; // WHITE
 	ListNode* _nextCity;
 public:
 	//ListNode();

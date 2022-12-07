@@ -74,3 +74,8 @@ ListNode* List::getTail() const
 {
 	return this->_tail;
 }
+
+void List::insertNearbyCitiesToSortedList(ListNode* nearbyCity)
+{
+	this->sortedInsert(this, nearbyCity);
+}

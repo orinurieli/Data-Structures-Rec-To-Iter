@@ -21,4 +21,6 @@ public:
 	ListNode* getHead() const;
 	ListNode* getTail() const;
 	void printList();
+
+	void insertNearbyCitiesToSortedList(ListNode* nearbyCity);
 };

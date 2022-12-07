@@ -32,7 +32,7 @@ void Manager::run()
 //
 //	for (int i = 0; i < _country.getNumOfCities(); i++)
 //	{
-//		citiesColorsArr[i] = 1; // WHITE = 1, BLACK = 0
+//		citiesColorsArr[i] = 0; // WHITE = 0, BLACK = 1
 //	}
 //
 //	return citiesColorsArr;
@@ -40,28 +40,33 @@ void Manager::run()
 
 int Manager::townDistanceRec(Country country, ListNode* srcCityNumber, ListNode* destCityNumber, int* citiesColorsArr)
 {
-	cout << endl << endl << "called with city #" << srcCityNumber->getCityNum() << endl << endl;
+	cout << endl << endl << "called with city #" << srcCityNumber->getCityNum() << "color: " << srcCityNumber->getColorCity() << endl << endl;
 	// turn statring city to black
-	srcCityNumber->setColorCity(citiesColorsArr[1]); // black
+	srcCityNumber->setColorCity(citiesColorsArr[1]); // color[0]=white, color[1]=black
 
 	// if start=end return 0
 	if (srcCityNumber->getCityNum() == destCityNumber->getCityNum()) return 0;
 
 	// no nearby cities return -1
 	List* nearbyCities = country.getCountryStructure(srcCityNumber->getCityNum());
-	cout << endl << "city #" << srcCityNumber->getCityNum() << " nearby cities: " << endl << endl;
+	cout << endl << "city #" << srcCityNumber->getCityNum() << " nearby cities: " << endl;
 	nearbyCities->printList();
+	cout << endl << endl;
 
-	if (nearbyCities->getHead() == nullptr)
+	ListNode* curr = nearbyCities.getHead();
+	if (curr == nullptr)
 		return -1;
 	else // we have nearby cities 
 	{
 		int res;
-		ListNode* curr = nearbyCities->getHead();
-		//curr->setColorCity(citiesColorsArr[1]);
+		while (curr->getColorCity() == citiesColorsArr[1])
+			curr = curr->getNextCity();
+
+		curr->setColorCity(citiesColorsArr[1]);
+
 		while (curr != NULL)
 		{
-			if (curr->getColorCity() == citiesColorsArr[0]) // white city // error - won't indicate first black city
+			if (curr->getColorCity() == citiesColorsArr[0]) // white city 
 			{
 				cout << endl << "curr send to rec: " << curr->getCityNum() << endl << endl;
 				res = townDistanceRec(country, curr, destCityNumber, citiesColorsArr);
