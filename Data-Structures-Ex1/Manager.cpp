@@ -53,7 +53,7 @@ int Manager::townDistanceRec(Country country, ListNode* srcCityNumber, ListNode*
 	nearbyCities->printList();
 	cout << endl << endl;
 
-	ListNode* curr = nearbyCities.getHead();
+	ListNode* curr = nearbyCities->getHead();
 	if (curr == nullptr)
 		return -1;
 	else // we have nearby cities 

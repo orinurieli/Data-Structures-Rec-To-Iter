@@ -34,7 +34,7 @@ int Country::getNumOfRoads() const
 	return _numOfRoads;
 }
 
-List Country::getCountryStructure(int cityNum) const
+List* Country::getCountryStructure(int cityNum) const
 {
 	return _countryStructure[cityNum - 1];
 }
