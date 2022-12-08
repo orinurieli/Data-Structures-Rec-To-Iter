@@ -1,17 +1,18 @@
 #pragma once
+#include "City.h"
 #include "ListNode.h"
 
 class ItemType
 {
 private:
-	int _cityNum;
+	City* _cityNum;
 	ListNode* _currNearbyCity;
 
 public:
 	ItemType();
-	ItemType(int cityNum, ListNode* currNearbyCity);
-	void setCityNum(int cityNum) { _cityNum = cityNum; }
-	int getCityNum() const { return _cityNum; }
+	ItemType(City* cityNum, ListNode* currNearbyCity);
+	void setCityNum(City* cityNum) { _cityNum = cityNum; }
+	City* getCityNum() const { return _cityNum; }
 	void setCurrNearbyCity(ListNode* currNearbyCity) { _currNearbyCity = currNearbyCity; }
 	ListNode* getCurrNearbyCity() const { return _currNearbyCity; }
 };

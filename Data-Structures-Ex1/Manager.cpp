@@ -1,6 +1,6 @@
 #include "Manager.h"
 
-void Manager::run()
+void Manager::runProgram()
 {
 	// all inputs & build the country stucture
 	getInputNumberOfCitiesandRoads(); // get number of cities and roads from the user

@@ -3,6 +3,6 @@
 int main()
 {
 	Manager manager;
-	manager.run();
+	manager.runProgram();
 	return 0;
 }

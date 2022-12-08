@@ -2,11 +2,11 @@
 
 ItemType::ItemType()
 {
-	_cityNum = 0;
+	_cityNum = nullptr;
 	_currNearbyCity = nullptr;
 }
 
-ItemType::ItemType(int cityNum, ListNode* currNearbyCity)
+ItemType::ItemType(City* cityNum, ListNode* currNearbyCity)
 {
 	_cityNum = cityNum;
 	_currNearbyCity = currNearbyCity;

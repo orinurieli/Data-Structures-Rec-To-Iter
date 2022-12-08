@@ -23,24 +23,20 @@ private:
 	int _destCityNumber = 0;
 
 public:
-	void run();
-
+	void runProgram();
 	int townDistanceRec(City* srcCity, City* destCity, vector<int> colorCitiesArr);
 	int townDistanceIter(City* srcCity, City* destCity, vector<int> colorCitiesArr);
-
 	vector<int> buildCitiesColorsArr();
 	void getInputNumberOfCitiesandRoads();
 	void getInputSrcAndDest();
 	void getPairsOfRoadLocation();
 	void buildCountryStructure();
 	bool hasWhiteNearbyCities(vector<int> colorCitiesArr, ListNode* currNearbyCity);
-
 	//void setSrcCityNumber(int srcCityNumber) { _srcCityNumber = srcCityNumber; }
 	//id setDestCityNumber(int destCityNumber) { _destCityNumber = destCityNumber; }
 	//int getSrcCityNumber() { return _srcCityNumber; }
 	//int getDestCityNumber() { return _destCityNumber; }
 	//vector<int> getColorCitiesArr() { return _colorCitiesRec; }
-
 	vector<pair<int, int>> removeDuplicates(vector<pair<int, int>> roadLocation);
 	bool isValidInput(int inputUser, int from, int to);
 	void printInvalidInput();
