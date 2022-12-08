@@ -22,7 +22,7 @@ void Manager::run()
 vector<int> Manager::buildCitiesColorsArr()
 {
 	vector<int> citiesColorsArr;
-
+	
 	for (int i = 0; i < _country.getNumOfCities(); i++)
 	{
 		citiesColorsArr.push_back(WHITE);
@@ -34,6 +34,7 @@ vector<int> Manager::buildCitiesColorsArr()
 bool Manager::hasWhiteNearbyCities(vector<int> colorCitiesArr, ListNode* currNearbyCity)
 {
 	int nearbyCityNumber;
+
 	while (currNearbyCity != nullptr)
 	{
 		nearbyCityNumber = currNearbyCity->getCityNum();
@@ -85,12 +86,6 @@ int Manager::townDistanceIter(City* srcCity, City* destCity, vector<int> colorCi
 	return 0; //need to return value
 }
 
-void Manager::buildCountryStructure()
-{
-	_country.initCountryStructure();
-	_country.fillCountryStructure(_roadLocation);
-}
-
 void Manager::getInputNumberOfCitiesandRoads()
 {
 	int numberOfCities;
@@ -109,6 +104,41 @@ void Manager::getInputNumberOfCitiesandRoads()
 	}
 	else
 		printInvalidInput();
+}
+
+void Manager::getPairsOfRoadLocation()
+{
+	int roadA, roadB;
+
+	cout << "Please enter " << _country.getNumOfRoads() << " pairs of roads: ";
+	
+	for (int i = 0; i < _country.getNumOfRoads(); i++)
+	{
+		cin >> roadA;
+		cin >> roadB;
+
+		if (!isValidInput(roadA, 1, _country.getNumOfCities()) || !isValidInput(roadB, 1, _country.getNumOfCities()) || roadA == roadB)
+		{
+			printInvalidInput();
+		}
+		else
+			_roadLocation.push_back({ roadA, roadB });
+	}
+
+	_roadLocation = removeDuplicates(_roadLocation);
+
+	// for testing only
+	/*(int i = 0; i < _roadLocation.size(); i++) {
+		cout << _roadLocation[i].first << " ";
+		cout << _roadLocation[i].second << endl;
+	}
+	*/
+}
+
+void Manager::buildCountryStructure()
+{
+	_country.initCountryStructure();
+	_country.fillCountryStructure(_roadLocation);
 }
 
 void Manager::getInputSrcAndDest()
@@ -131,27 +161,6 @@ void Manager::getInputSrcAndDest()
 	}
 	else
 		printInvalidInput();
-}
-
-void Manager::getPairsOfRoadLocation()
-{
-	int roadA, roadB;
-	cout << "Please enter " << _country.getNumOfRoads() << " pairs of roads: ";
-
-	for (int i = 0; i < _country.getNumOfRoads(); i++)
-	{
-		cin >> roadA;
-		cin >> roadB;
-
-		if (!isValidInput(roadA, 1, _country.getNumOfCities()) || !isValidInput(roadB, 1, _country.getNumOfCities()))
-		{
-			printInvalidInput();
-		}
-		else
-			_roadLocation.push_back({ roadA, roadB });
-	}
-
-	_roadLocation = removeDuplicates(_roadLocation);
 }
 
 bool Manager::isValidInput(int inputUser, int from, int to)
@@ -177,17 +186,17 @@ void Manager::printInvalidInput()
 	exit(0);
 }
 
-vector<pair<int, int>> Manager::removeDuplicates(vector<pair<int, int>> arr)
+vector<pair<int, int>> Manager::removeDuplicates(vector<pair<int, int>> roadLocation)
 {
-	for (int i = 0; i < arr.size(); i++)
+	for (int i = 0; i < roadLocation.size(); i++)
 	{
-		for (int j = i + 1; j < arr.size(); j++)
+		for (int j = i + 1; j < roadLocation.size(); j++)
 		{
-			if (arr[i].first == arr[j].first && arr[i].second == arr[j].second)
+			if (roadLocation[i].first == roadLocation[j].first && roadLocation[i].second == roadLocation[j].second)
 			{
-				arr.erase(arr.begin() + i);
+				roadLocation.erase(roadLocation.begin() + i);
 			}
 		}
 	}
-	return arr;
+	return roadLocation;
 }

@@ -40,7 +40,7 @@ public:
 	//int getDestCityNumber() { return _destCityNumber; }
 	//vector<int> getColorCitiesArr() { return _colorCitiesRec; }
 
-	vector<pair<int, int>> removeDuplicates(vector<pair<int, int>> arr);
+	vector<pair<int, int>> removeDuplicates(vector<pair<int, int>> roadLocation);
 	bool isValidInput(int inputUser, int from, int to);
 	void printInvalidInput();
 	void printResultRec(int res);

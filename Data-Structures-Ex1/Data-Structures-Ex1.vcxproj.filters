@@ -33,6 +33,9 @@
     <ClInclude Include="ListNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ItemType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Manager.cpp">
@@ -54,6 +57,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ListNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemType.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
