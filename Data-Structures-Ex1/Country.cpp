@@ -49,7 +49,7 @@ void Country::initCountryStructure()
 	}
 }
 
-void Country::fillCountryStructure(vector<pair<int, int>> roadLocation)
+void Country::createCountryStructure(vector<pair<int, int>> roadLocation)
 {
 	int firstCityNumber, secondCityNumber;
 

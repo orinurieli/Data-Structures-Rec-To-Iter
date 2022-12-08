@@ -5,7 +5,8 @@
 
 using namespace std;
 
-class Stack {
+class Stack 
+{
 private:
 	StackNode* _top;
 
@@ -17,5 +18,4 @@ public:
 	void Push(ItemType item);
 	ItemType Pop(); 
 	ItemType Top();
-	void printEmptyStack();
 };

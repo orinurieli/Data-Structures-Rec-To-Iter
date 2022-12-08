@@ -3,6 +3,7 @@
 #include <vector>
 #include "Country.h"
 #include "City.h"
+#include "Stack.h"
 #include "List.h"
 
 using namespace std;

@@ -83,7 +83,12 @@ int Manager::townDistanceRec(City* srcCity, City* destCity, vector<int> colorCit
 int Manager::townDistanceIter(City* srcCity, City* destCity, vector<int> colorCitiesArr)
 {
 	//TODO: algorithm using stack (ADT)
-	return 0; //need to return value
+	Stack stack;
+
+
+
+
+	return NO_PATH; 
 }
 
 void Manager::getInputNumberOfCitiesandRoads()
@@ -139,7 +144,7 @@ void Manager::getPairsOfRoadLocation()
 void Manager::buildCountryStructure()
 {
 	_country.initCountryStructure();
-	_country.fillCountryStructure(_roadLocation);
+	_country.createCountryStructure(_roadLocation);
 }
 
 void Manager::getInputSrcAndDest()

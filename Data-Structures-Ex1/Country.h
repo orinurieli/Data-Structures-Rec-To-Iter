@@ -22,5 +22,5 @@ public:
 	int getNumOfRoads() const;
 	City* getCityInCountryStructure(int cityNum) const;
 	void initCountryStructure();
-	void fillCountryStructure(vector<pair<int, int>> roadLocation);
+	void createCountryStructure(vector<pair<int, int>> roadLocation);
 };
