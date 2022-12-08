@@ -38,9 +38,54 @@ void Manager::run()
 //	return citiesColorsArr;
 //}
 
+
 int Manager::townDistanceRec(Country country, ListNode* srcCityNumber, ListNode* destCityNumber, int* citiesColorsArr)
 {
-	cout << endl << endl << "called with city #" << srcCityNumber->getCityNum() << "color: " << srcCityNumber->getColorCity() << endl << endl;
+	// turn statring city to black
+	srcCityNumber->setColorCity(citiesColorsArr[1]);
+
+	cout << endl << endl << "called with city #" << srcCityNumber->getCityNum() << " color: " << srcCityNumber->getColorCity() << endl << endl;
+
+	// if start=end return 0
+	if (srcCityNumber->getCityNum() == destCityNumber->getCityNum()) return 0;
+	else
+	{
+		// no nearby cities return -1
+		List* nearbyCities = country.getCountryStructure(srcCityNumber->getCityNum());
+		ListNode* curr = nearbyCities->getHead();
+
+		cout << endl << "city #" << srcCityNumber->getCityNum() << " nearby cities: " << endl;
+		nearbyCities->printList();
+		cout << endl << endl;
+
+		if (curr == nullptr)
+			return -1;
+		else // we have nearby cities
+		{
+			int res;
+
+			while (curr != NULL) // 2,4
+			{
+				if (curr->getColorCity() == citiesColorsArr[0]) // white city
+				{
+					curr->setColorCity(citiesColorsArr[1]);
+					cout << endl << "curr send to rec: " << curr->getCityNum() << endl << endl;
+					res = townDistanceRec(country, curr, destCityNumber, citiesColorsArr);
+					return res != -1 ? res + 1 : -1;
+				}
+				else // black city
+				{
+					cout << endl << "black city" << endl << endl;
+					curr = curr->getNextCity();
+				}
+			}
+		}
+	}
+}
+
+/*int Manager::townDistanceRec(Country country, ListNode* srcCityNumber, ListNode* destCityNumber, int* citiesColorsArr)
+{
+	cout << endl << endl << "called with city #" << srcCityNumber->getCityNum() << " color: " << srcCityNumber->getColorCity() << endl << endl;
 	// turn statring city to black
 	srcCityNumber->setColorCity(citiesColorsArr[1]); // color[0]=white, color[1]=black
 
@@ -49,30 +94,27 @@ int Manager::townDistanceRec(Country country, ListNode* srcCityNumber, ListNode*
 
 	// no nearby cities return -1
 	List* nearbyCities = country.getCountryStructure(srcCityNumber->getCityNum());
-	cout << endl << "city #" << srcCityNumber->getCityNum() << " nearby cities: " << endl;
+	//cout << endl << "city #" << srcCityNumber->getCityNum() << " nearby cities: " << endl;
 	nearbyCities->printList();
 	cout << endl << endl;
 
 	ListNode* curr = nearbyCities->getHead();
 	if (curr == nullptr)
 		return -1;
-	else // we have nearby cities 
+	else // we have nearby cities
 	{
 		int res;
-		while (curr->getColorCity() == citiesColorsArr[1])
-			curr = curr->getNextCity();
-
-		curr->setColorCity(citiesColorsArr[1]);
 
 		while (curr != NULL)
 		{
-			if (curr->getColorCity() == citiesColorsArr[0]) // white city 
+			if (curr->getColorCity() == citiesColorsArr[0]) // white city
 			{
 				cout << endl << "curr send to rec: " << curr->getCityNum() << endl << endl;
+		curr->setColorCity(citiesColorsArr[1]);
 				res = townDistanceRec(country, curr, destCityNumber, citiesColorsArr);
 				return res != -1 ? res + 1 : -1;
 			}
-			else // black city 
+			else // black city
 			{
 				cout << endl << "black city" << endl << endl;
 				curr = curr->getNextCity();
@@ -81,7 +123,7 @@ int Manager::townDistanceRec(Country country, ListNode* srcCityNumber, ListNode*
 	}
 
 	return -1;
-}
+}*/
 
 int Manager::townDistanceIter(Country country, ListNode* srcCityNumber, ListNode* destCityNumber, int* citiesColorsArr)
 {
