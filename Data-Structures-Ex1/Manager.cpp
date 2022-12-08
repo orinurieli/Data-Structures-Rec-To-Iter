@@ -91,12 +91,13 @@ void Manager::getInputNumberOfCitiesandRoads()
 	int numberOfCities;
 	int numberOfRoads;
 
-	cout << "Insert number of cities: ";
-	cin >> numberOfCities;
+	cin >> numberOfCities >> numberOfRoads;
 
-	cout << "Insert number of roads: ";
-	cin >> numberOfRoads;
-
+	//cout << "Insert number of cities: ";
+	//cin >> numberOfCities;
+	//cout << "Insert number of roads: ";
+	//cin >> numberOfRoads;
+	
 	if (numberOfCities > 0 && numberOfRoads > 0)
 	{
 		_country.setNumOfCities(numberOfCities);
@@ -110,7 +111,7 @@ void Manager::getPairsOfRoadLocation()
 {
 	int roadA, roadB;
 
-	cout << "Please enter " << _country.getNumOfRoads() << " pairs of roads: ";
+	//cout << "Please enter " << _country.getNumOfRoads() << " pairs of roads: ";
 	
 	for (int i = 0; i < _country.getNumOfRoads(); i++)
 	{
@@ -146,13 +147,15 @@ void Manager::getInputSrcAndDest()
 	int srcCityNumber;
 	int destCityNumber;
 
-	cout << "Enter number of source city ";
-	cout << "(between 1 to " << _country.getNumOfCities() << "): ";
-	cin >> srcCityNumber;
+	cin >> srcCityNumber >> destCityNumber;
 
-	cout << "Enter number of destination city ";
-	cout << "(not including " << srcCityNumber << "): ";
-	cin >> destCityNumber;
+	//cout << "Enter number of source city ";
+	//cout << "(between 1 to " << _country.getNumOfCities() << "): ";
+	//cin >> srcCityNumber;
+
+	//cout << "Enter number of destination city ";
+	//cout << "(not including " << srcCityNumber << "): ";
+	//cin >> destCityNumber;
 
 	if (isValidInput(destCityNumber, 1, _country.getNumOfCities()) && destCityNumber != srcCityNumber)
 	{
