@@ -60,6 +60,7 @@ void Country::fillCountryStructure(vector<pair<int, int>> roadLocation)
 
 		ListNode* nearbyCityToFirst = new ListNode(secondCityNumber); // 2
 		ListNode* nearbyCityToSecond = new ListNode(firstCityNumber); // 1
+
 		_countryStructure[firstCityNumber - 1].insertNearbyCitiesToSortedList(nearbyCityToFirst);
 		_countryStructure[secondCityNumber - 1].insertNearbyCitiesToSortedList(nearbyCityToSecond);
 	}
