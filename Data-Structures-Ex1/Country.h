@@ -11,7 +11,7 @@ class Country
 private:
 	int _numOfCities;
 	int _numOfRoads;
-	vector<City> _countryStructure;
+	City* _countryStructure;
 
 public:
 	Country();
@@ -20,7 +20,7 @@ public:
 	void setNumOfRoads(int numOfRoads);
 	int getNumOfCities() const;
 	int getNumOfRoads() const;
-	List* getCountryStructure(int cityNum) const;
+	City* getCityInCountryStructure(int cityNum) const;
 	void initCountryStructure();
 	void fillCountryStructure(vector<pair<int, int>> roadLocation);
 };

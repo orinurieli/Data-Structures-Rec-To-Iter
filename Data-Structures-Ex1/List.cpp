@@ -1,6 +1,5 @@
 #include "List.h"
 
-
 List::List()
 {
 	_head = nullptr;
@@ -19,7 +18,7 @@ void List::makeEmpty()
 
 bool List::isEmpty()
 {
-	return _head == nullptr ? true : false;
+	return _head == nullptr;
 }
 
 void List::sortedInsert(List* lst, ListNode* newNode)
@@ -49,7 +48,6 @@ void List::sortedInsert(List* lst, ListNode* newNode)
 	curr->setNextCity(newNode);
 }
 
-
 void List::printList()
 {
 	ListNode* curr = _head;
@@ -73,9 +71,4 @@ ListNode* List::getHead() const
 ListNode* List::getTail() const
 {
 	return this->_tail;
-}
-
-void List::insertNearbyCitiesToSortedList(ListNode* nearbyCity)
-{
-	this->sortedInsert(this, nearbyCity);
 }

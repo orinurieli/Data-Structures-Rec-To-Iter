@@ -16,11 +16,10 @@ public:
 	void makeEmpty();
 	bool isEmpty();
 	void sortedInsert(List* lst, ListNode* newCity);
-	void deleteNode(int node);
+	//void deleteNode(int node);
 	void setHead(ListNode* head) { _head = head; }
+	void setTail(ListNode* tail) { _tail = tail; }
 	ListNode* getHead() const;
 	ListNode* getTail() const;
 	void printList();
-
-	void insertNearbyCitiesToSortedList(ListNode* nearbyCity);
 };

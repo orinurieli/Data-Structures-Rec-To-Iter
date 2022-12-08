@@ -1,33 +1,15 @@
 #pragma once
 #include "City.h"
 
-//City::City()
-//{
-//	_cityNum = 0;
-//	_nearbyCities = new List;
-//	_color = 1; 
-//}
-
 City::City(int cityNum, City* nextCity)
 {
 	_cityNum = cityNum;
 	_nearbyCities = new List;
-	_color = 1;
-}
-
-void City::setColor(int color)
-{
-	_color = color;
 }
 
 void City::setCityNum(int cityNum)
 {
 	_cityNum = cityNum;
-}
-
-int City::getColor() const
-{
-	return _color;
 }
 
 int City::getCityNum() const

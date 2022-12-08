@@ -1,131 +1,85 @@
 #include "Manager.h"
 
-
-Manager::Manager()
-{
-	_srcCityNumber = new ListNode();
-	_destCityNumber = new ListNode();
-}
-
 void Manager::run()
 {
-	int res;
-	// get all inputs & build the country structure
-	getinputNumberOfCitiesandRoads();
-	getinputStartingAndEndPoint();
-	getPairsOfRoadLocation();
-	buildCountryStructure(); // creates an array of LinkedLists from cities
+	// all inputs & build the country stucture
+	getInputNumberOfCitiesandRoads(); // get number of cities and roads from the user
+	getPairsOfRoadLocation(); // get pair of road location from the user
+	buildCountryStructure(); // creates an array of linked lists from cities
+	getInputSrcAndDest(); // get the source and the destination location from the user
 
 	// <Recursive way>
-	res = townDistanceRec(_country, _srcCityNumber, _destCityNumber, _citiesColorsArr);
-	cout << endl << endl << "Favorite Distance:  " << res << endl;
+	_colorCitiesRec = buildCitiesColorsArr(); // build cities colors array and init all the cities to white
+	int resultRec = townDistanceRec(_country.getCityInCountryStructure(_srcCityNumber), _country.getCityInCountryStructure(_destCityNumber), _colorCitiesRec); // return the favorite distance in recursive way
+	printResultRec(resultRec); // print the result of favorite distance
 
 	// <Iterative way>
-	//1. buildCitiesColorsArr(); [build cities color and then init all the cities in the country structure as whites]
-	//2. townDistanceIter(country, _srcCityNumber, _destCityNumber/*, cities*/); [do the algorithm in iterative way]
-	//3. print calculated distance
+	_colorCitiesIter = buildCitiesColorsArr(); // build cities colors array and init all the cities to white
+	int resultIter = townDistanceIter(_country.getCityInCountryStructure(_srcCityNumber), _country.getCityInCountryStructure(_destCityNumber), _colorCitiesIter); // return the favorite distance in iterative way
+	printResultIter(resultIter); // print the result of favorite distance
 }
 
-//int* Manager::buildCitiesColorsArr()
-//{
-//	int* citiesColorsArr = new int[_country.getNumOfCities()];
-//
-//	for (int i = 0; i < _country.getNumOfCities(); i++)
-//	{
-//		citiesColorsArr[i] = 0; // WHITE = 0, BLACK = 1
-//	}
-//
-//	return citiesColorsArr;
-//}
-
-
-int Manager::townDistanceRec(Country country, ListNode* srcCityNumber, ListNode* destCityNumber, int* citiesColorsArr)
+vector<int> Manager::buildCitiesColorsArr()
 {
-	// turn statring city to black
-	srcCityNumber->setColorCity(citiesColorsArr[1]);
+	vector<int> citiesColorsArr;
 
-	cout << endl << endl << "called with city #" << srcCityNumber->getCityNum() << " color: " << srcCityNumber->getColorCity() << endl << endl;
+	for (int i = 0; i < _country.getNumOfCities(); i++)
+	{
+		citiesColorsArr.push_back(WHITE);
+	}
 
-	// if start=end return 0
-	if (srcCityNumber->getCityNum() == destCityNumber->getCityNum()) return 0;
+	return citiesColorsArr;
+}
+
+bool Manager::hasWhiteNearbyCities(vector<int> colorCitiesArr, ListNode* currNearbyCity)
+{
+	int nearbyCityNumber;
+	while (currNearbyCity != nullptr)
+	{
+		nearbyCityNumber = currNearbyCity->getCityNum();
+		if (colorCitiesArr[nearbyCityNumber - 1] == WHITE)
+			return true;
+
+		currNearbyCity = currNearbyCity->getNextCity();
+	}
+	return false;
+}
+
+int Manager::townDistanceRec(City* srcCity, City* destCity, vector<int> colorCitiesArr)
+{
+	int srcCityNumber = srcCity->getCityNum();
+	int destCityNumber = destCity->getCityNum();
+	List* nearbyCities = srcCity->getNearbyCities();
+	ListNode* currNearbyCity = nearbyCities->getHead();
+	int nearbyCityNumber, favoriteDistance;
+
+	colorCitiesArr[srcCityNumber - 1] = BLACK;
+
+	if (srcCityNumber == destCityNumber)
+		return 0;
 	else
 	{
-		// no nearby cities return -1
-		List* nearbyCities = country.getCountryStructure(srcCityNumber->getCityNum());
-		ListNode* curr = nearbyCities->getHead();
-
-		cout << endl << "city #" << srcCityNumber->getCityNum() << " nearby cities: " << endl;
-		nearbyCities->printList();
-		cout << endl << endl;
-
-		if (curr == nullptr)
-			return -1;
-		else // we have nearby cities
+		if (!hasWhiteNearbyCities(colorCitiesArr, currNearbyCity))
+			return NO_PATH;
+		else
 		{
-			int res;
-
-			while (curr != NULL) // 2,4
+			while (currNearbyCity != nullptr)
 			{
-				if (curr->getColorCity() == citiesColorsArr[0]) // white city
+				nearbyCityNumber = currNearbyCity->getCityNum();
+				if (colorCitiesArr[nearbyCityNumber - 1] == WHITE)
 				{
-					curr->setColorCity(citiesColorsArr[1]);
-					cout << endl << "curr send to rec: " << curr->getCityNum() << endl << endl;
-					res = townDistanceRec(country, curr, destCityNumber, citiesColorsArr);
-					return res != -1 ? res + 1 : -1;
+					favoriteDistance = townDistanceRec(_country.getCityInCountryStructure(nearbyCityNumber), destCity, colorCitiesArr);
+					if (favoriteDistance != NO_PATH)
+						return favoriteDistance + 1;
 				}
-				else // black city
-				{
-					cout << endl << "black city" << endl << endl;
-					curr = curr->getNextCity();
-				}
+				currNearbyCity = currNearbyCity->getNextCity();
 			}
+			return NO_PATH;
 		}
 	}
 }
 
-/*int Manager::townDistanceRec(Country country, ListNode* srcCityNumber, ListNode* destCityNumber, int* citiesColorsArr)
-{
-	cout << endl << endl << "called with city #" << srcCityNumber->getCityNum() << " color: " << srcCityNumber->getColorCity() << endl << endl;
-	// turn statring city to black
-	srcCityNumber->setColorCity(citiesColorsArr[1]); // color[0]=white, color[1]=black
-
-	// if start=end return 0
-	if (srcCityNumber->getCityNum() == destCityNumber->getCityNum()) return 0;
-
-	// no nearby cities return -1
-	List* nearbyCities = country.getCountryStructure(srcCityNumber->getCityNum());
-	//cout << endl << "city #" << srcCityNumber->getCityNum() << " nearby cities: " << endl;
-	nearbyCities->printList();
-	cout << endl << endl;
-
-	ListNode* curr = nearbyCities->getHead();
-	if (curr == nullptr)
-		return -1;
-	else // we have nearby cities
-	{
-		int res;
-
-		while (curr != NULL)
-		{
-			if (curr->getColorCity() == citiesColorsArr[0]) // white city
-			{
-				cout << endl << "curr send to rec: " << curr->getCityNum() << endl << endl;
-		curr->setColorCity(citiesColorsArr[1]);
-				res = townDistanceRec(country, curr, destCityNumber, citiesColorsArr);
-				return res != -1 ? res + 1 : -1;
-			}
-			else // black city
-			{
-				cout << endl << "black city" << endl << endl;
-				curr = curr->getNextCity();
-			}
-		}
-	}
-
-	return -1;
-}*/
-
-int Manager::townDistanceIter(Country country, ListNode* srcCityNumber, ListNode* destCityNumber, int* citiesColorsArr)
+int Manager::townDistanceIter(City* srcCity, City* destCity, vector<int> colorCitiesArr)
 {
 	//TODO: algorithm using stack (ADT)
 	return 0; //need to return value
@@ -133,12 +87,11 @@ int Manager::townDistanceIter(Country country, ListNode* srcCityNumber, ListNode
 
 void Manager::buildCountryStructure()
 {
-	//TODO: check input
 	_country.initCountryStructure();
 	_country.fillCountryStructure(_roadLocation);
 }
 
-void Manager::getinputNumberOfCitiesandRoads()
+void Manager::getInputNumberOfCitiesandRoads()
 {
 	int numberOfCities;
 	int numberOfRoads;
@@ -146,16 +99,19 @@ void Manager::getinputNumberOfCitiesandRoads()
 	cout << "Insert number of cities: ";
 	cin >> numberOfCities;
 
-	_country.setNumOfCities(numberOfCities);
-
 	cout << "Insert number of roads: ";
 	cin >> numberOfRoads;
 
-	_country.setNumOfRoads(numberOfRoads);
-
+	if (numberOfCities > 0 && numberOfRoads > 0)
+	{
+		_country.setNumOfCities(numberOfCities);
+		_country.setNumOfRoads(numberOfRoads);
+	}
+	else
+		printInvalidInput();
 }
 
-void Manager::getinputStartingAndEndPoint()
+void Manager::getInputSrcAndDest()
 {
 	int srcCityNumber;
 	int destCityNumber;
@@ -164,34 +120,35 @@ void Manager::getinputStartingAndEndPoint()
 	cout << "(between 1 to " << _country.getNumOfCities() << "): ";
 	cin >> srcCityNumber;
 
-	if (isValidInput(srcCityNumber, 1, _country.getNumOfCities()))
-	{
-		_srcCityNumber->setCityNum(srcCityNumber);
-	}
-
 	cout << "Enter number of destination city ";
-	cout << "(between 1 to " << _country.getNumOfCities() << "): ";
+	cout << "(not including " << srcCityNumber << "): ";
 	cin >> destCityNumber;
 
-	if (isValidInput(destCityNumber, 1, _country.getNumOfCities()))
+	if (isValidInput(destCityNumber, 1, _country.getNumOfCities()) && destCityNumber != srcCityNumber)
 	{
-		_destCityNumber->setCityNum(destCityNumber);
+		_srcCityNumber = srcCityNumber;
+		_destCityNumber = destCityNumber;
 	}
+	else
+		printInvalidInput();
 }
 
 void Manager::getPairsOfRoadLocation()
 {
-	int road1, road2;
-	cout << "please enter " << _country.getNumOfRoads() << " pairs of roads: ";
+	int roadA, roadB;
+	cout << "Please enter " << _country.getNumOfRoads() << " pairs of roads: ";
 
 	for (int i = 0; i < _country.getNumOfRoads(); i++)
 	{
-		cin >> road1;
-		cin >> road2;
+		cin >> roadA;
+		cin >> roadB;
 
-		_roadLocation.resize(_country.getNumOfRoads());
-		_roadLocation[i].first = road1;
-		_roadLocation[i].second = road2;
+		if (!isValidInput(roadA, 1, _country.getNumOfCities()) || !isValidInput(roadB, 1, _country.getNumOfCities()))
+		{
+			printInvalidInput();
+		}
+		else
+			_roadLocation.push_back({ roadA, roadB });
 	}
 
 	_roadLocation = removeDuplicates(_roadLocation);
@@ -200,6 +157,24 @@ void Manager::getPairsOfRoadLocation()
 bool Manager::isValidInput(int inputUser, int from, int to)
 {
 	return inputUser >= from && inputUser <= to;
+}
+
+void Manager::printResultRec(int res)
+{
+	cout << endl << "=====RECURSIVE WAY=====" << endl;
+	cout << "Favorite distance:  " << res << endl;
+}
+
+void Manager::printResultIter(int res)
+{
+	cout << endl << "=====ITERATIVE WAY=====" << endl;
+	cout << "Favorite distance:  " << res << endl;
+}
+
+void Manager::printInvalidInput()
+{
+	cout << "Invalid input" << endl;
+	exit(0);
 }
 
 vector<pair<int, int>> Manager::removeDuplicates(vector<pair<int, int>> arr)
