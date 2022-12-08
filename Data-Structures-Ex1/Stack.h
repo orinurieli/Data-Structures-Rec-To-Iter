@@ -3,12 +3,12 @@
 #include <vector>
 using namespace std;
 
-const int MAX_SIZE = 100;
+#include "ItemType.h"
+#include "StackNode.h"
 
 class Stack {
 private:
-	int _top; // index above top item
-	vector<int> _data;
+	StackNode* _top; // pointer to top item
 
 public:
 	Stack();
@@ -16,9 +16,8 @@ public:
 
 	void makeEmpty();
 	int isEmpty();
-	int isFull();
 
-	void Push(int item);
-	void Pop();
-	void Top();
+	void Push(ItemType item);
+	ItemType Pop(); // return itemType* ?
+	ItemType Top();
 };

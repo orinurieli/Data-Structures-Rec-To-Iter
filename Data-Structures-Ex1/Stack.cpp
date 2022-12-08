@@ -2,21 +2,46 @@
 
 Stack::Stack()
 {
-	_top = 0;
+	_top = NULL;
+}
+
+Stack::~Stack()
+{
+	makeEmpty();
 }
 
 void Stack::makeEmpty()
 {
-	_top = 0;
+	StackNode* temp;
+
+	while (_top != NULL)
+	{
+		temp = _top;
+		_top = _top->getNext();
+		delete temp;
+	}
 }
 
 int Stack::isEmpty()
 {
-	return (_top == 0);
+	return (_top == NULL);
 }
 
-int Stack::isFull()
+void Stack::Push(ItemType item)
 {
-	return (_top == MAX_SIZE);
+	_top == new StackNode(item, _top);
 }
 
+ItemType Stack::Pop()
+{
+	if (isEmpty())
+		return NULL;
+
+	StackNode* temp = _top;
+	ItemType item = _top->getData();
+	_top = _top->getNext();
+
+	delete temp;
+
+	return item;
+}
