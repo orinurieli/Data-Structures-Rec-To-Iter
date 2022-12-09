@@ -17,5 +17,6 @@ public:
 	int isEmpty();
 	void Push(ItemType item);
 	ItemType Pop(); 
-	ItemType Top();
+	ItemType Top() { return _top->getData(); }
+	void printProblemStack();
 };

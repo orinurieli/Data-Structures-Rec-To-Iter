@@ -35,7 +35,7 @@ void Stack::Push(ItemType item)
 ItemType Stack::Pop()
 {
 	if (isEmpty())
-		cout << "The is a problem in the stack!" << endl;
+		printProblemStack();
 
 	StackNode* temp = _top;
 	ItemType item = _top->getData();
@@ -45,7 +45,8 @@ ItemType Stack::Pop()
 	return item;
 }
 
-ItemType Stack::Top()
+void Stack::printProblemStack()
 {
-	return _top->getData();
+	cout << "The is a problem in the stack!" << endl;
+	exit(1);
 }

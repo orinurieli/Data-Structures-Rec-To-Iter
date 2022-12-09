@@ -1,4 +1,5 @@
 #include "Manager.h"
+#include <string>
 
 void Manager::runProgram()
 {
@@ -10,12 +11,12 @@ void Manager::runProgram()
 
 	// <Recursive way>
 	_colorCitiesRec = buildCitiesColorsArr(); // build cities colors array and init all the cities to white
-	int resultRec = townDistanceRec(_country.getCityInCountryStructure(_srcCityNumber), _country.getCityInCountryStructure(_destCityNumber), _colorCitiesRec); // return the favorite distance in recursive way
+	int resultRec = townDistanceRec(_country.getCityInCountry(_srcCityNumber), _country.getCityInCountry(_destCityNumber), _colorCitiesRec); // return the favorite distance in recursive way
 	printResultRec(resultRec); // print the result of favorite distance
-
+	
 	// <Iterative way>
 	_colorCitiesIter = buildCitiesColorsArr(); // build cities colors array and init all the cities to white
-	int resultIter = townDistanceIter(_country.getCityInCountryStructure(_srcCityNumber), _country.getCityInCountryStructure(_destCityNumber), _colorCitiesIter); // return the favorite distance in iterative way
+	int resultIter = townDistanceIter(_country.getCityInCountry(_srcCityNumber), _country.getCityInCountry(_destCityNumber), _colorCitiesIter); // return the favorite distance in iterative way
 	printResultIter(resultIter); // print the result of favorite distance
 }
 
@@ -69,7 +70,7 @@ int Manager::townDistanceRec(City* srcCity, City* destCity, vector<int> colorCit
 				nearbyCityNumber = currNearbyCity->getCityNum();
 				if (colorCitiesArr[nearbyCityNumber - 1] == WHITE)
 				{
-					favoriteDistance = townDistanceRec(_country.getCityInCountryStructure(nearbyCityNumber), destCity, colorCitiesArr);
+					favoriteDistance = townDistanceRec(_country.getCityInCountry(nearbyCityNumber), destCity, colorCitiesArr);
 					if (favoriteDistance != NO_PATH)
 						return favoriteDistance + 1;
 				}
@@ -134,17 +135,17 @@ void Manager::getPairsOfRoadLocation()
 	_roadLocation = removeDuplicates(_roadLocation);
 
 	// for testing only
-	/*(int i = 0; i < _roadLocation.size(); i++) {
+	/*for (int i = 0; i < _roadLocation.size(); i++) {
 		cout << _roadLocation[i].first << " ";
 		cout << _roadLocation[i].second << endl;
-	}
-	*/
+	}*/
+	
 }
 
 void Manager::buildCountryStructure()
 {
-	_country.initCountryStructure();
-	_country.createCountryStructure(_roadLocation);
+	_country.initCountry();
+	_country.createCountry(_roadLocation);
 }
 
 void Manager::getInputSrcAndDest()
@@ -191,7 +192,7 @@ void Manager::printResultIter(int res)
 void Manager::printInvalidInput()
 {
 	cout << "Invalid input" << endl;
-	exit(0);
+	exit(1);
 }
 
 vector<pair<int, int>> Manager::removeDuplicates(vector<pair<int, int>> roadLocation)
@@ -200,12 +201,17 @@ vector<pair<int, int>> Manager::removeDuplicates(vector<pair<int, int>> roadLoca
 	{
 		for (int j = i + 1; j < roadLocation.size(); j++)
 		{
-			if (roadLocation[i].first == roadLocation[j].first && roadLocation[i].second == roadLocation[j].second &&
-				roadLocation[i].first == roadLocation[j].second && roadLocation[i].second == roadLocation[j].first)
+			if (isSamePair(roadLocation, i, j))
 			{
 				roadLocation.erase(roadLocation.begin() + i);
 			}
 		}
 	}
 	return roadLocation;
+}
+
+bool Manager::isSamePair(vector<pair<int, int>> roadLocation, int from, int to)
+{
+	return (roadLocation[from].first == roadLocation[to].first && roadLocation[from].second == roadLocation[to].second) ||
+		   (roadLocation[from].first == roadLocation[to].second && roadLocation[from].second == roadLocation[to].first);
 }
