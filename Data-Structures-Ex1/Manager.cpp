@@ -200,7 +200,8 @@ vector<pair<int, int>> Manager::removeDuplicates(vector<pair<int, int>> roadLoca
 	{
 		for (int j = i + 1; j < roadLocation.size(); j++)
 		{
-			if (roadLocation[i].first == roadLocation[j].first && roadLocation[i].second == roadLocation[j].second)
+			if (roadLocation[i].first == roadLocation[j].first && roadLocation[i].second == roadLocation[j].second &&
+				roadLocation[i].first == roadLocation[j].second && roadLocation[i].second == roadLocation[j].first)
 			{
 				roadLocation.erase(roadLocation.begin() + i);
 			}
