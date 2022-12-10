@@ -1,16 +1,15 @@
 #pragma once
-
 #include "ItemType.h"
 
-class StackNode {
+class StackNode 
+{
+private:
 	ItemType _data;
 	StackNode* _next;
 
-private:
+public:
 	StackNode();
-	StackNode(ItemType data, StackNode* next);
-	~StackNode();
-
+	StackNode(ItemType data, StackNode* next = nullptr);
 	ItemType getData() const { return _data; }
 	ItemType getNext() const { return _next; }
 

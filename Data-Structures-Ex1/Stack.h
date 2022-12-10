@@ -1,23 +1,22 @@
 #pragma once
 #include <iostream>
-#include <vector>
+#include "StackNode.h"
+#include "ItemType.h"
+
 using namespace std;
 
-#include "ItemType.h"
-#include "StackNode.h"
-
-class Stack {
+class Stack 
+{
 private:
-	StackNode* _top; // pointer to top item
+	StackNode* _top;
 
 public:
 	Stack();
 	~Stack();
-
 	void makeEmpty();
 	int isEmpty();
-
 	void Push(ItemType item);
-	ItemType Pop(); // return itemType* ?
-	ItemType Top();
+	ItemType Pop(); 
+	ItemType Top() { return _top->getData(); }
+	void printProblemStack();
 };

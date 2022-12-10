@@ -8,18 +8,15 @@ class List
 {
 private:
 	ListNode* _head;
-	ListNode* _tail;
 
 public:
-	List();
+	List(ListNode* head = nullptr);
 	~List();
 	void makeEmpty();
 	bool isEmpty();
 	void sortedInsert(List* lst, ListNode* newCity);
-	//void deleteNode(int node);
+	void deleteAfter(ListNode* toDeleteAfter);
 	void setHead(ListNode* head) { _head = head; }
-	void setTail(ListNode* tail) { _tail = tail; }
-	ListNode* getHead() const;
-	ListNode* getTail() const;
+	ListNode* getHead() const { return this->_head; }
 	void printList();
 };

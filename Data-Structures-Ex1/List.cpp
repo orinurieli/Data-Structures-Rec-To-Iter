@@ -1,24 +1,44 @@
 #include "List.h"
 
-List::List()
+List::List(ListNode* head)
 {
-	_head = nullptr;
-	_tail = _head;
+	_head = head;
 }
 
 List::~List()
 {
-	makeEmpty();
+	ListNode* curr = _head;
+	ListNode* currNext = curr->getNextCity();
+
+	while (currNext != nullptr)
+	{
+		delete curr;
+		curr = currNext;
+		currNext = currNext->getNextCity();
+	}
+	delete curr;
 }
 
 void List::makeEmpty()
 {
-	_head = _tail = nullptr;
+	_head = nullptr;
 }
 
 bool List::isEmpty()
 {
 	return _head == nullptr;
+}
+
+void List::deleteAfter(ListNode* toDeleteAfter)
+{
+	ListNode* toDelete = toDeleteAfter->getNextCity();
+	ListNode* temp = toDeleteAfter->getNextCity()->getNextCity();
+	
+	if (toDeleteAfter->getNextCity() == nullptr)
+		return;
+		
+	toDeleteAfter->setNextCity(temp);
+	delete(toDelete);
 }
 
 void List::sortedInsert(List* lst, ListNode* newNode)
@@ -61,14 +81,4 @@ void List::printList()
 		cout << curr->getCityNum() << " ";
 		curr = curr->getNextCity();
 	}
-}
-
-ListNode* List::getHead() const
-{
-	return this->_head;
-}
-
-ListNode* List::getTail() const
-{
-	return this->_tail;
 }
