@@ -89,6 +89,7 @@ int Manager::townDistanceIter(City* srcCity, City* destCity, vector<int> colorCi
 
 
 
+
 	return NO_PATH; 
 }
 
