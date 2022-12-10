@@ -90,33 +90,55 @@ int Manager::townDistanceIter(City* srcCity, City* destCity, vector<int> colorCi
 
 	List* nearbyCities = srcCity->getNearbyCities();
 	ListNode* currNearbyCity = nearbyCities->getHead();
-	int nearbyCityNumber = nearbyCityNumber = currNearbyCity->getCityNum(), favoriteDistance;
+	int nearbyCityNumber = currNearbyCity->getCityNum(), favoriteDistance = NO_PATH;
+	City* currCity = _country.getCityInCountry(nearbyCityNumber);
 
-	ItemType curr(srcCity, currNearbyCity, START);
+
+
+	colorCitiesArr[srcCityNumber - 1] = BLACK;
 
 	// base case
 	if (srcCity == destCity) return 0;
 
 	// push data before rec call
+	ItemType curr(srcCity, currNearbyCity, START);
 	Stack.Push(curr);
 
-	// push data that get passed to rec call
-	ItemType currSentToRec(_country.getCityInCountry(nearbyCityNumber), _country.getCityInCountry(nearbyCityNumber)->getNearbyCities()->getHead(), START);
-	Stack.Push(currSentToRec);
-
+	// initiate and push data that get passed to rec call
+	ItemType next(currCity, currCity->getNearbyCities()->getHead(), START);
+	Stack.Push(next);
 
 	while (!Stack.isEmpty())
 	{
 		curr = Stack.Pop();
 
-		if (curr.getLine() == START)
+		if (curr.getLine() == START && colorCitiesArr[nearbyCityNumber - 1] == WHITE) // check this condition later
 		{
+			cout << endl << "START with city" << curr.getCity()->getCityNum() << endl;
+			if (curr.getCity()->getCityNum() == destCity->getCityNum()) // we reached dest
+			{
+				cout << endl << "src == dest, top of the Stack" << endl;
+				return favoriteDistance;
+			}
+			else {
+				curr.setLine(AFTER);
+				Stack.Push(curr);
 
+				nearbyCityNumber = currNearbyCity->getCityNum(); // get the next city and send to rec
+
+				ItemType next(_country.getCityInCountry(nearbyCityNumber), curr.getCity()->getNearbyCities()->getHead(), START);
+				Stack.Push(next);
+			}
 		}
 
 		else if (curr.getLine() == AFTER)
 		{
+			cout << endl << "AFTER with city" << curr.getCity()->getCityNum() << endl;
+			curr.setLine(AFTER);
+			Stack.Push(curr);
 
+			ItemType next(, START);
+			Stack.Push(next);
 		}
 	}
 

@@ -13,7 +13,7 @@ public:
 	ItemType();
 	ItemType(City* cityNum, ListNode* currNearbyCity, int line);
 	void setCityNum(City* cityNum) { _cityNum = cityNum; }
-	City* getCityNum() const { return _cityNum; }
+	City* getCity() const { return _cityNum; }
 	void setCurrNearbyCity(ListNode* currNearbyCity) { _currNearbyCity = currNearbyCity; }
 	ListNode* getCurrNearbyCity() const { return _currNearbyCity; }
 	int getLine() const { return _line; }
