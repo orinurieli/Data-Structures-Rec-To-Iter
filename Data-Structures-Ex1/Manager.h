@@ -10,6 +10,10 @@ using namespace std;
 
 int const WHITE = 0;
 int const BLACK = 1;
+
+int const START = 2;
+int const AFTER = 3;
+
 int const NO_PATH = -1;
 
 class Manager

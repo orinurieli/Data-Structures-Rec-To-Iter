@@ -13,7 +13,7 @@ void Manager::runProgram()
 	_colorCitiesRec = buildCitiesColorsArr(); // build cities colors array and init all the cities to white
 	int resultRec = townDistanceRec(_country.getCityInCountry(_srcCityNumber), _country.getCityInCountry(_destCityNumber), _colorCitiesRec); // return the favorite distance in recursive way
 	printResultRec(resultRec); // print the result of favorite distance
-	
+
 	// <Iterative way>
 	_colorCitiesIter = buildCitiesColorsArr(); // build cities colors array and init all the cities to white
 	int resultIter = townDistanceIter(_country.getCityInCountry(_srcCityNumber), _country.getCityInCountry(_destCityNumber), _colorCitiesIter); // return the favorite distance in iterative way
@@ -23,7 +23,7 @@ void Manager::runProgram()
 vector<int> Manager::buildCitiesColorsArr()
 {
 	vector<int> citiesColorsArr;
-	
+
 	for (int i = 0; i < _country.getNumOfCities(); i++)
 	{
 		citiesColorsArr.push_back(WHITE);
@@ -83,13 +83,47 @@ int Manager::townDistanceRec(City* srcCity, City* destCity, vector<int> colorCit
 
 int Manager::townDistanceIter(City* srcCity, City* destCity, vector<int> colorCitiesArr)
 {
-	//TODO: algorithm using stack (ADT)
-	Stack stack;
+	Stack Stack;
+
+	int srcCityNumber = srcCity->getCityNum();
+	int destCityNumber = destCity->getCityNum();
+
+	List* nearbyCities = srcCity->getNearbyCities();
+	ListNode* currNearbyCity = nearbyCities->getHead();
+	int nearbyCityNumber = nearbyCityNumber = currNearbyCity->getCityNum(), favoriteDistance;
+
+	ItemType curr(srcCity, currNearbyCity, START);
+
+	// base case
+	if (srcCity == destCity) return 0;
+
+	// push data before rec call
+	Stack.Push(curr);
+
+	// push data that get passed to rec call
+	ItemType currSentToRec(_country.getCityInCountry(nearbyCityNumber), _country.getCityInCountry(nearbyCityNumber)->getNearbyCities()->getHead(), START);
+	Stack.Push(currSentToRec);
+
+
+	while (!Stack.isEmpty())
+	{
+		curr = Stack.Pop();
+
+		if (curr.getLine() == START)
+		{
+
+		}
+
+		else if (curr.getLine() == AFTER)
+		{
+
+		}
+	}
 
 
 
 
-	return NO_PATH; 
+	return NO_PATH;
 }
 
 void Manager::getInputNumberOfCitiesandRoads()
@@ -103,7 +137,7 @@ void Manager::getInputNumberOfCitiesandRoads()
 	//cin >> numberOfCities;
 	//cout << "Insert number of roads: ";
 	//cin >> numberOfRoads;
-	
+
 	if (numberOfCities > 0 && numberOfRoads > 0)
 	{
 		_country.setNumOfCities(numberOfCities);
@@ -118,7 +152,7 @@ void Manager::getPairsOfRoadLocation()
 	int roadA, roadB;
 
 	//cout << "Please enter " << _country.getNumOfRoads() << " pairs of roads: ";
-	
+
 	for (int i = 0; i < _country.getNumOfRoads(); i++)
 	{
 		cin >> roadA;
@@ -139,7 +173,7 @@ void Manager::getPairsOfRoadLocation()
 		cout << _roadLocation[i].first << " ";
 		cout << _roadLocation[i].second << endl;
 	}*/
-	
+
 }
 
 void Manager::buildCountryStructure()
@@ -213,5 +247,5 @@ vector<pair<int, int>> Manager::removeDuplicates(vector<pair<int, int>> roadLoca
 bool Manager::isSamePair(vector<pair<int, int>> roadLocation, int from, int to)
 {
 	return (roadLocation[from].first == roadLocation[to].first && roadLocation[from].second == roadLocation[to].second) ||
-		   (roadLocation[from].first == roadLocation[to].second && roadLocation[from].second == roadLocation[to].first);
+		(roadLocation[from].first == roadLocation[to].second && roadLocation[from].second == roadLocation[to].first);
 }
