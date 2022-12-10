@@ -17,6 +17,4 @@ private:
 	ItemType setData(ItemType data) const { _data = data; }
 	ItemType setNext(StackNode* next) const { _next = next; }
 
-
-
 };
