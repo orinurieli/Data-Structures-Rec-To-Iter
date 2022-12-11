@@ -2,14 +2,16 @@
 
 ItemType::ItemType()
 {
-	_cityNum = nullptr;
+	_currCity = nullptr;
 	_currNearbyCity = nullptr;
 	_line = 0;
+	_favoriteDistance = 0;
 }
 
-ItemType::ItemType(City* cityNum, ListNode* currNearbyCity, int line)
+ItemType::ItemType(City* currCity, ListNode* currNearbyCity, int line, int favoriteDistance)
 {
-	_cityNum = cityNum;
+	_currCity = currCity;
 	_currNearbyCity = currNearbyCity;
 	_line = line;
+	_favoriteDistance = favoriteDistance;
 }
