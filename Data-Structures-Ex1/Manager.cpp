@@ -65,12 +65,16 @@ int Manager::townDistanceRec(City* srcCity, City* destCity, vector<int> colorCit
 			return NO_PATH;
 		else
 		{
+			// 5 5
+			// 1 4 1 2 3 5 2 5 2 3
+
 			while (currNearbyCity != nullptr)
 			{
 				nearbyCityNumber = currNearbyCity->getCityNum();
 				if (colorCitiesArr[nearbyCityNumber - 1] == WHITE)
 				{
 					favoriteDistance = townDistanceRec(_country.getCityInCountry(nearbyCityNumber), destCity, colorCitiesArr);
+					//		cout << endl << endl << "for city #" << srcCityNumber << "favDistance: " << favoriteDistance << endl << endl;
 					if (favoriteDistance != NO_PATH)
 						return favoriteDistance + 1;
 				}
@@ -93,59 +97,84 @@ int Manager::townDistanceIter(City* srcCity, City* destCity, vector<int> colorCi
 	int nearbyCityNumber = currNearbyCity->getCityNum(), favoriteDistance = NO_PATH;
 	City* currCity = _country.getCityInCountry(nearbyCityNumber);
 
-
+	int returnValue = 0;
 
 	colorCitiesArr[srcCityNumber - 1] = BLACK;
 
-	// base case
+	// base cases
 	if (srcCity == destCity) return 0;
+	if (!hasWhiteNearbyCities(colorCitiesArr, currNearbyCity))
+		return NO_PATH;
 
 	// push data before rec call
-	ItemType curr(srcCity, currNearbyCity, START);
+	ItemType curr(srcCity, currNearbyCity, START, 0);
 	Stack.Push(curr);
 
 	// initiate and push data that get passed to rec call
-	ItemType next(currCity, currCity->getNearbyCities()->getHead(), START);
+	ItemType next(currCity, currCity->getNearbyCities()->getHead(), START, 0);
 	Stack.Push(next);
 
 	while (!Stack.isEmpty())
 	{
 		curr = Stack.Pop();
 
-		if (curr.getLine() == START && colorCitiesArr[nearbyCityNumber - 1] == WHITE) // check this condition later
+		if (curr.getLine() == START && colorCitiesArr[curr.getCity()->getCityNum() - 1] == WHITE)
 		{
-			cout << endl << "START with city" << curr.getCity()->getCityNum() << endl;
-			if (curr.getCity()->getCityNum() == destCity->getCityNum()) // we reached dest
+			colorCitiesArr[curr.getCity()->getCityNum() - 1] = BLACK;
+			cout << endl << "START City #" << curr.getCity()->getCityNum() << endl;
+			if (curr.getCity()->getCityNum() == destCity->getCityNum()) // error we never get to this part
 			{
 				cout << endl << "src == dest, top of the Stack" << endl;
-				return favoriteDistance;
+				curr.setFavoriteDistance(1);
+				returnValue = curr.getFavoriteDistance(); // no value - 0
 			}
 			else {
 				curr.setLine(AFTER);
+				curr.setFavoriteDistance(-1);
 				Stack.Push(curr);
 
-				nearbyCityNumber = currNearbyCity->getCityNum(); // get the next city and send to rec
+				ListNode* currNode = _country.getCityInCountry(curr.getCity()->getCityNum())->getNearbyCities()->getHead(); // 2
+				while (currNode != NULL && colorCitiesArr[currNode->getCityNum() - 1] == BLACK)
+					currNode = currNode->getNextCity();
 
-				ItemType next(_country.getCityInCountry(nearbyCityNumber), curr.getCity()->getNearbyCities()->getHead(), START);
-				Stack.Push(next);
+				if (currNode != NULL) {
+					cout << endl << "We send: " << endl;
+					cout << "curr: " << currNode->getCityNum() << " nearby:" << currNode->getNextCity() << endl;
+					ItemType next(_country.getCityInCountry(currNode->getCityNum()), currNode->getNextCity(), START, curr.getFavoriteDistance());
+					Stack.Push(next);
+				}
 			}
 		}
 
 		else if (curr.getLine() == AFTER)
 		{
-			cout << endl << "AFTER with city" << curr.getCity()->getCityNum() << endl;
-			curr.setLine(AFTER);
-			Stack.Push(curr);
+			cout << endl << "AFTER City #" << curr.getCity()->getCityNum() << endl;
+			curr.setFavoriteDistance(returnValue);
+			cout << endl << "returnValue: " << returnValue << endl; // fix this
+		}
+		else // first element of the Stack
+		{
+			cout << endl << endl << "Back to SrcCity" << endl << endl;
 
-			ItemType next(, START);
-			Stack.Push(next);
+			ListNode* currNode = _country.getCityInCountry(curr.getCity()->getCityNum())->getNearbyCities()->getHead(); // 2
+			while (currNode != NULL && colorCitiesArr[currNode->getCityNum() - 1] == BLACK)
+				currNode = currNode->getNextCity();
+
+			// todo: we should push the last element to the top of the stack, so next round we could get src == dest
+			if (currNode != NULL) {
+				cout << endl << "last currNode: " << currNode->getCityNum() << endl;
+				ItemType next(_country.getCityInCountry(currNode->getCityNum()), currNode->getNextCity(), START, curr.getFavoriteDistance());
+				Stack.Push(next);
+			}
+
+			returnValue = curr.getFavoriteDistance() + 1;
+			cout << "last returnValue: " << returnValue << endl;
 		}
 	}
 
 
-
-
-	return NO_PATH;
+	if (returnValue > 0) return returnValue;
+	else return NO_PATH;
 }
 
 void Manager::getInputNumberOfCitiesandRoads()
