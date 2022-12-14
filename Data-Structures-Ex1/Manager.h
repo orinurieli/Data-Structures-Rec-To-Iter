@@ -28,14 +28,15 @@ private:
 
 public:
 	void runProgram();
-	int townDistanceRec(City* srcCity, City* destCity, vector<int> colorCitiesArr);
-	int townDistanceIter(City* srcCity, City* destCity, vector<int> colorCitiesArr);
+	int townDistanceRec(City* srcCity, City* destCity);
+	int townDistanceIter(City* srcCity, City* destCity);
 	vector<int> buildCitiesColorsArr();
 	void getInputNumberOfCitiesandRoads();
 	void getInputSrcAndDest();
 	void getPairsOfRoadLocation();
 	void buildCountryStructure();
 	bool hasWhiteNearbyCities(vector<int> colorCitiesArr, ListNode* currNearbyCity);
+	void Func(Stack& Stack, ItemType curr, vector<int> colorCitiesArr, int currCityNumber);
 	vector<pair<int, int>> removeDuplicates(vector<pair<int, int>> roadLocation);
 	bool isValidInput(int inputUser, int from, int to);
 	void printInvalidInput();
