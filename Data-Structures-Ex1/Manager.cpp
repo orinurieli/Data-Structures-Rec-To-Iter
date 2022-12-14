@@ -82,6 +82,7 @@ int Manager::townDistanceRec(City* srcCity, City* destCity)
 void Manager::firstWhiteNearbyCity(Stack& Stack, ItemType curr, vector<int> colorCitiesArr, int currCityNumber)
 {
 	ListNode* currCity = _country.getCityInCountry(currCityNumber)->getNearbyCities()->getHead();
+	
 	while (currCity != nullptr && colorCitiesArr[(currCity->getCityNum() - 1)] == BLACK)
 		currCity = currCity->getNextCity();
 
