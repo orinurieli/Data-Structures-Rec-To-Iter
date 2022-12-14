@@ -73,10 +73,14 @@ int Manager::townDistanceRec(City* srcCity, City* destCity, vector<int> colorCit
 				nearbyCityNumber = currNearbyCity->getCityNum();
 				if (colorCitiesArr[nearbyCityNumber - 1] == WHITE)
 				{
+					//cout << endl << endl << "Before Recurion: city #" << nearbyCityNumber << endl << endl;
 					favoriteDistance = townDistanceRec(_country.getCityInCountry(nearbyCityNumber), destCity, colorCitiesArr);
-					//		cout << endl << endl << "for city #" << srcCityNumber << "favDistance: " << favoriteDistance << endl << endl;
+					//cout << endl << endl << "After Recurion: city #" << nearbyCityNumber << " Favorite Distance: " << favoriteDistance + 1 << endl << endl;
 					if (favoriteDistance != NO_PATH)
+					{ 
+						//cout << endl << endl << "After Recurion: city #" << nearbyCityNumber << " Favorite Distance: " << favoriteDistance + 1 << endl << endl;
 						return favoriteDistance + 1;
+					}
 				}
 				currNearbyCity = currNearbyCity->getNextCity();
 			}
@@ -244,7 +248,7 @@ void Manager::getInputSrcAndDest()
 	//cout << "(not including " << srcCityNumber << "): ";
 	//cin >> destCityNumber;
 
-	if (isValidInput(destCityNumber, 1, _country.getNumOfCities()) && destCityNumber != srcCityNumber)
+	if (isValidInput(destCityNumber, 1, _country.getNumOfCities()))
 	{
 		_srcCityNumber = srcCityNumber;
 		_destCityNumber = destCityNumber;
