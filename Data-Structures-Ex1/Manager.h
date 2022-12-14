@@ -36,7 +36,7 @@ public:
 	void getPairsOfRoadLocation();
 	void buildCountryStructure();
 	bool hasWhiteNearbyCities(vector<int> colorCitiesArr, ListNode* currNearbyCity);
-	void Func(Stack& Stack, ItemType curr, vector<int> colorCitiesArr, int currCityNumber);
+	void firstWhiteNearbyCity(Stack& Stack, ItemType curr, vector<int> colorCitiesArr, int currCityNumber);
 	vector<pair<int, int>> removeDuplicates(vector<pair<int, int>> roadLocation);
 	bool isValidInput(int inputUser, int from, int to);
 	void printInvalidInput();
