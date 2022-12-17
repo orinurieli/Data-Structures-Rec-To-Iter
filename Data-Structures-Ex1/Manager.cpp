@@ -52,7 +52,7 @@ int Manager::townDistanceRec(City* srcCity, City* destCity)
 	int srcCityNumber = srcCity->getCityNum();
 	int destCityNumber = destCity->getCityNum();
 	ListNode* currNearbyCity = srcCity->getNearbyCities()->getHead();
-	int nearbyCityNumber, favoriteDistance;
+	int nearbyCityNumber, preferreDistance;
 
 	_colorCitiesRec[(srcCityNumber - 1)] = BLACK;
 
@@ -62,19 +62,19 @@ int Manager::townDistanceRec(City* srcCity, City* destCity)
 		return NO_PATH;
 	else
 	{
-		//5 5 
-		//1 4 1 2 3 5 2 5 2 3
-		
+		//10 13 
+		//1 6 6 7 2 8 2 5 3 4 4 10 9 10 2 9 2 3 3 5 8 10 3 10 1 2
+
 		while (currNearbyCity != nullptr)
 		{
 			nearbyCityNumber = currNearbyCity->getCityNum();
 			if (_colorCitiesRec[(nearbyCityNumber - 1)] == WHITE)
 			{
-				//cout << endl << endl << "Before Recurion: call city #" << nearbyCityNumber << endl << endl;
-				favoriteDistance = townDistanceRec(_country.getCityInCountry(nearbyCityNumber), destCity);
-				//cout << endl << endl << "After Recurion: return city #" << nearbyCityNumber << " the result from this city is: " << favoriteDistance + 1 << endl << endl;
-				if (favoriteDistance != NO_PATH)
-					return favoriteDistance + 1;
+				cout << endl << endl << "Before Recurion: call city #" << nearbyCityNumber << endl << endl;
+				preferreDistance = townDistanceRec(_country.getCityInCountry(nearbyCityNumber), destCity);
+				cout << endl << endl << "After Recurion: return city #" << nearbyCityNumber << " the result from this city is: " << preferreDistance + 1 << endl << endl;
+				if (preferreDistance != NO_PATH)
+					return preferreDistance + 1;
 			}
 			currNearbyCity = currNearbyCity->getNextCity();
 		}
@@ -93,7 +93,7 @@ void Manager::firstWhiteNearbyCity(Stack& Stack, ItemType curr, vector<int> colo
 	{
 		//cout << endl << "We send ";
 		//cout << "curr: " << currCity->getCityNum() << endl;
-		ItemType next(_country.getCityInCountry(currCity->getCityNum()), currCity->getNextCity(), START, curr.getFavoriteDistance() + 1);
+		ItemType next(_country.getCityInCountry(currCity->getCityNum()), currCity->getNextCity(), START, curr.getPreferreDistance() + 1);
 		Stack.Push(next);
 	}
 }
@@ -121,12 +121,11 @@ int Manager::townDistanceIter(City* srcCity, City* destCity)
 	Stack.Push(curr);
 
 	// initiate and push data that get passed to rec call
-	ItemType next(currCity, currCity->getNearbyCities()->getHead(), START, curr.getFavoriteDistance() + 1);
+	ItemType next(currCity, currCity->getNearbyCities()->getHead(), START, curr.getPreferreDistance() + 1);
 	Stack.Push(next);
 
-	//5 5 
+	//5 5
 	//1 4 1 2 3 5 2 5 2 3
-
 	while (!Stack.isEmpty())
 	{
 		curr = Stack.Pop();
@@ -139,7 +138,7 @@ int Manager::townDistanceIter(City* srcCity, City* destCity)
 			if (currCityNumber == destcitynumber)
 			{
 				//cout << endl << "src == dest, top of the stack" << endl;
-				returnValue = curr.getFavoriteDistance();
+				returnValue = curr.getPreferreDistance();
 				break;
 			}
 			else
@@ -158,7 +157,7 @@ int Manager::townDistanceIter(City* srcCity, City* destCity)
 		{
 			//cout << endl << endl << "back to srccity" << endl << endl;
 			firstWhiteNearbyCity(Stack, curr, _colorCitiesIter, currCityNumber);
-			returnValue = curr.getFavoriteDistance() + 1;
+			returnValue = curr.getPreferreDistance() + 1;
 			//cout << "last returnValue: " << returnValue << endl;
 		}
 	}
@@ -178,7 +177,7 @@ void Manager::getInputNumberOfCitiesandRoads()
 	//cout << "Insert number of roads: ";
 	//cin >> numberOfRoads;
 
-	if (numberOfCities > 0 && numberOfRoads > 0)
+	if (numberOfCities > 1 && numberOfRoads > 0)
 	{
 		_country.setNumOfCities(numberOfCities);
 		_country.setNumOfRoads(numberOfRoads);
@@ -253,14 +252,12 @@ bool Manager::isValidInput(int inputUser, int from, int to)
 
 void Manager::printResultRec(int res)
 {
-	cout << endl << "=====RECURSIVE WAY=====" << endl;
-	cout << "Favorite distance:  " << res << endl;
+	cout << "Preferred distance (recursive algorithm): " << res << endl;
 }
 
 void Manager::printResultIter(int res)
 {
-	cout << endl << "=====ITERATIVE WAY=====" << endl;
-	cout << "Favorite distance:  " << res << endl;
+	cout << "Preferred distance (iterative stack algorithm): " << res << endl;
 }
 
 void Manager::printInvalidInput()

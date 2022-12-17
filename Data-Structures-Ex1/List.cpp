@@ -41,31 +41,30 @@ void List::deleteAfter(ListNode* toDeleteAfter)
 	delete(toDelete);
 }
 
-void List::sortedInsert(List* lst, ListNode* newNode)
-{
+void List::sortedInsert(List* lst, ListNode* newNode) {
+	if (newNode == nullptr) {
+		return;  // Don't insert a null node
+	}
+
 	ListNode* curr = lst->getHead();
-
-	if (newNode == nullptr) return;
-	if (curr == nullptr)
-	{
-		curr = newNode;
-		lst->setHead(curr);
-		curr->setNextCity(nullptr);
-		return;
-	}
-
-	if (curr->getNextCity() == nullptr && curr->getCityNum() > newNode->getCityNum()) {
-		newNode->setNextCity(curr);
-		curr->setNextCity(nullptr);
+	if (curr == nullptr) {
+		// Inserting into an empty list
 		lst->setHead(newNode);
-		return;
+		newNode->setNextCity(nullptr);
 	}
-
-	while (curr->getNextCity() != nullptr && curr->getNextCity()->getCityNum() < newNode->getCityNum())
-		curr = curr->getNextCity();
-
-	newNode->setNextCity(curr->getNextCity());
-	curr->setNextCity(newNode);
+	else if (newNode->getCityNum() < curr->getCityNum()) {
+		// Inserting new node at the beginning of the list
+		newNode->setNextCity(curr);
+		lst->setHead(newNode);
+	}
+	else {
+		// Search for the correct position to insert the new node
+		while (curr->getNextCity() != nullptr && curr->getNextCity()->getCityNum() < newNode->getCityNum()) {
+			curr = curr->getNextCity();
+		}
+		newNode->setNextCity(curr->getNextCity());
+		curr->setNextCity(newNode);
+	}
 }
 
 void List::printList()

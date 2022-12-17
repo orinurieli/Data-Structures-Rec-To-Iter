@@ -5,13 +5,13 @@ ItemType::ItemType()
 	_currCity = nullptr;
 	_currNearbyCity = nullptr;
 	_line = 0;
-	_favoriteDistance = 0;
+	_preferreDistance = 0;
 }
 
-ItemType::ItemType(City* currCity, ListNode* currNearbyCity, int line, int favoriteDistance)
+ItemType::ItemType(City* currCity, ListNode* currNearbyCity, int line, int preferreDistance)
 {
 	_currCity = currCity;
 	_currNearbyCity = currNearbyCity;
 	_line = line;
-	_favoriteDistance = favoriteDistance;
+	_preferreDistance = preferreDistance;
 }

@@ -1,4 +1,3 @@
-#pragma once
 #include "City.h"
 
 City::City(int cityNum, City* nextCity)
