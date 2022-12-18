@@ -70,9 +70,9 @@ int Manager::townDistanceRec(City* srcCity, City* destCity)
 			nearbyCityNumber = currNearbyCity->getCityNum();
 			if (_colorCitiesRec[(nearbyCityNumber - 1)] == WHITE)
 			{
-				cout << endl << endl << "Before Recurion: call city #" << nearbyCityNumber << endl << endl;
+				//cout << endl << endl << "Before Recurion: call city #" << nearbyCityNumber << endl << endl;
 				preferreDistance = townDistanceRec(_country.getCityInCountry(nearbyCityNumber), destCity);
-				cout << endl << endl << "After Recurion: return city #" << nearbyCityNumber << " the result from this city is: " << preferreDistance + 1 << endl << endl;
+				//cout << endl << endl << "After Recurion: return city #" << nearbyCityNumber << " the result from this city is: " << preferreDistance + 1 << endl << endl;
 				if (preferreDistance != NO_PATH)
 					return preferreDistance + 1;
 			}
@@ -85,7 +85,7 @@ int Manager::townDistanceRec(City* srcCity, City* destCity)
 void Manager::firstWhiteNearbyCity(Stack& Stack, ItemType curr, vector<int> colorCitiesArr, int currCityNumber)
 {
 	ListNode* currCity = _country.getCityInCountry(currCityNumber)->getNearbyCities()->getHead();
-	
+
 	while (currCity != nullptr && colorCitiesArr[(currCity->getCityNum() - 1)] == BLACK)
 		currCity = currCity->getNextCity();
 
@@ -150,15 +150,27 @@ int Manager::townDistanceIter(City* srcCity, City* destCity)
 		}
 		else if (curr.getLine() == AFTER)
 		{
+			ListNode* currCity = _country.getCityInCountry(currCityNumber)->getNearbyCities()->getHead();
+
+			while (currCity != nullptr && _colorCitiesIter[(currCity->getCityNum() - 1)] == BLACK)
+				currCity = currCity->getNextCity();
+
+			if (currCity != nullptr && _colorCitiesIter[(currCity->getCityNum() - 1)] == WHITE)
+			{
+				ItemType next(_country.getCityInCountry(currCity->getCityNum()), currCity->getNextCity(), START, curr.getPreferreDistance() + 1);
+				Stack.Push(next);
+			}
+
 			//cout << endl << "after city #" << curr.getCity()->getCityNum() << endl;
-			//cout << endl << "returnvalue: " << returnValue << endl;
+			//cout << endl << "returnvalue: " << curr.getPreferreDistance() << endl;
+
 		}
 		else // we are back to the first element of the stack
 		{
 			//cout << endl << endl << "back to srccity" << endl << endl;
 			firstWhiteNearbyCity(Stack, curr, _colorCitiesIter, currCityNumber);
 			returnValue = curr.getPreferreDistance() + 1;
-			//cout << "last returnValue: " << returnValue << endl;
+			//cout << "last returnValue: " << curr.getPreferreDistance() + 1 << endl;
 		}
 	}
 
@@ -262,7 +274,7 @@ void Manager::printResultIter(int res)
 
 void Manager::printInvalidInput()
 {
-	cout << "Invalid input" << endl;
+	cout << "invalid input" << endl;
 	exit(1);
 }
 
