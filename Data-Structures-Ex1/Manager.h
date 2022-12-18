@@ -37,10 +37,10 @@ public:
 	void buildCountryStructure();
 	bool hasWhiteNearbyCities(vector<int> colorCitiesArr, ListNode* currNearbyCity);
 	void firstWhiteNearbyCity(Stack& Stack, ItemType curr, vector<int> colorCitiesArr, int currCityNumber);
-	vector<pair<int, int>> removeDuplicates(vector<pair<int, int>> roadLocation);
+	bool hasDuplicatePair(vector<pair<int, int>> roadLocation);
+	bool isSamePair(vector<pair<int, int>> roadLocation, int from, int to);
 	bool isValidInput(int inputUser, int from, int to);
 	void printInvalidInput();
 	void printResultRec(int res);
 	void printResultIter(int res);
-	bool isSamePair(vector<pair<int, int>> roadLocation, int from, int to);
 };

@@ -9,12 +9,12 @@ void Manager::runProgram()
 	buildCountryStructure(); // creates an array of linked lists from cities
 	getInputSrcAndDest(); // get the source and the destination location from the user
 
-	// <Recursive way>
+	// <recursive algorithm>
 	_colorCitiesRec = buildCitiesColorsArr(); // build cities colors array and init all the cities to white
 	int resultRec = townDistanceRec(_country.getCityInCountry(_srcCityNumber), _country.getCityInCountry(_destCityNumber)); // return the favorite distance in recursive way
 	printResultRec(resultRec); // print the result of favorite distance
 
-	// <Iterative way>
+	// <iterative stack algorithm>
 	_colorCitiesIter = buildCitiesColorsArr(); // build cities colors array and init all the cities to white
 	int resultIter = townDistanceIter(_country.getCityInCountry(_srcCityNumber), _country.getCityInCountry(_destCityNumber)); // return the favorite distance in iterative way
 	printResultIter(resultIter); // print the result of favorite distance
@@ -217,7 +217,8 @@ void Manager::getPairsOfRoadLocation()
 			_roadLocation.push_back({ roadA, roadB });
 	}
 
-	_roadLocation = removeDuplicates(_roadLocation);
+	if (_roadLocation.size() != _country.getNumOfRoads() || hasDuplicatePair(_roadLocation))
+		printInvalidInput();
 
 	// for testing only
 	/*for (int i = 0; i < _roadLocation.size(); i++) {
@@ -257,6 +258,27 @@ void Manager::getInputSrcAndDest()
 	}
 }
 
+bool Manager::hasDuplicatePair(vector<pair<int, int>> roadLocation)
+{
+	for (int i = 0; i < roadLocation.size(); i++)
+	{
+		for (int j = i + 1; j < roadLocation.size(); j++)
+		{
+			if (isSamePair(roadLocation, i, j))
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+bool Manager::isSamePair(vector<pair<int, int>> roadLocation, int from, int to)
+{
+	return (roadLocation[from].first == roadLocation[to].first && roadLocation[from].second == roadLocation[to].second) ||
+		(roadLocation[from].first == roadLocation[to].second && roadLocation[from].second == roadLocation[to].first);
+}
+
 bool Manager::isValidInput(int inputUser, int from, int to)
 {
 	return inputUser >= from && inputUser <= to;
@@ -276,25 +298,4 @@ void Manager::printInvalidInput()
 {
 	cout << "invalid input" << endl;
 	exit(1);
-}
-
-vector<pair<int, int>> Manager::removeDuplicates(vector<pair<int, int>> roadLocation)
-{
-	for (int i = 0; i < roadLocation.size(); i++)
-	{
-		for (int j = i + 1; j < roadLocation.size(); j++)
-		{
-			if (isSamePair(roadLocation, i, j))
-			{
-				roadLocation.erase(roadLocation.begin() + i);
-			}
-		}
-	}
-	return roadLocation;
-}
-
-bool Manager::isSamePair(vector<pair<int, int>> roadLocation, int from, int to)
-{
-	return (roadLocation[from].first == roadLocation[to].first && roadLocation[from].second == roadLocation[to].second) ||
-		(roadLocation[from].first == roadLocation[to].second && roadLocation[from].second == roadLocation[to].first);
 }
