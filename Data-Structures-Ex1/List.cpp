@@ -8,15 +8,13 @@ List::List(ListNode* head)
 List::~List()
 {
 	ListNode* curr = _head;
-	ListNode* currNext = curr->getNextCity();
 
-	while (currNext != nullptr)
+	while (curr != nullptr) 
 	{
+		ListNode* next = curr->getNextCity();
 		delete curr;
-		curr = currNext;
-		currNext = currNext->getNextCity();
+		curr = next;
 	}
-	delete curr;
 }
 
 void List::makeEmpty()
@@ -29,39 +27,51 @@ bool List::isEmpty()
 	return _head == nullptr;
 }
 
-void List::deleteAfter(ListNode* toDeleteAfter)
+void List::deleteAfter(ListNode* toDeleteAfter) 
 {
-	ListNode* toDelete = toDeleteAfter->getNextCity();
-	ListNode* temp = toDeleteAfter->getNextCity()->getNextCity();
-	
-	if (toDeleteAfter->getNextCity() == nullptr)
+	if (!toDeleteAfter || !toDeleteAfter->getNextCity()) 
 		return;
-		
-	toDeleteAfter->setNextCity(temp);
-	delete(toDelete);
+
+	ListNode* toDelete = toDeleteAfter->getNextCity();
+	toDeleteAfter->setNextCity(toDelete->getNextCity());
+	delete toDelete;
 }
 
-void List::sortedInsert(List* lst, ListNode* newNode) {
-	if (newNode == nullptr) {
-		return;  // Don't insert a null node
-	}
+void List::insertAfter(ListNode* prevNode, int cityNum)
+{
+	if (!prevNode) 
+		return;
+
+	ListNode* newNode = new ListNode(cityNum);
+	newNode->setNextCity(prevNode->getNextCity());
+	prevNode->setNextCity(newNode);
+}
+
+void List::sortedInsert(List* lst, ListNode* newNode) 
+{
+	if (newNode == nullptr) 
+		return;  // don't insert a null node
 
 	ListNode* curr = lst->getHead();
-	if (curr == nullptr) {
-		// Inserting into an empty list
+
+	if (curr == nullptr) 
+	{
+		// inserting into an empty list
 		lst->setHead(newNode);
 		newNode->setNextCity(nullptr);
 	}
-	else if (newNode->getCityNum() < curr->getCityNum()) {
-		// Inserting new node at the beginning of the list
+	else if (newNode->getCityNum() < curr->getCityNum()) 
+	{
+		// inserting new node at the beginning of the list
 		newNode->setNextCity(curr);
 		lst->setHead(newNode);
 	}
-	else {
-		// Search for the correct position to insert the new node
-		while (curr->getNextCity() != nullptr && curr->getNextCity()->getCityNum() < newNode->getCityNum()) {
+	else 
+	{
+		// search for the correct position to insert the new node
+		while (curr->getNextCity() != nullptr && curr->getNextCity()->getCityNum() < newNode->getCityNum())
 			curr = curr->getNextCity();
-		}
+		
 		newNode->setNextCity(curr->getNextCity());
 		curr->setNextCity(newNode);
 	}
