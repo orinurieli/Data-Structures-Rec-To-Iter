@@ -248,13 +248,13 @@ void Manager::getInputSrcAndDest()
 	//cout << "(not including " << srcCityNumber << "): ";
 	//cin >> destCityNumber;
 
-	if (isValidInput(destCityNumber, 1, _country.getNumOfCities()))
+	if (!isValidInput(srcCityNumber, 1, _country.getNumOfCities()) || !isValidInput(destCityNumber, 1, _country.getNumOfCities()))
+		printInvalidInput();
+	else
 	{
 		_srcCityNumber = srcCityNumber;
 		_destCityNumber = destCityNumber;
 	}
-	else
-		printInvalidInput();
 }
 
 bool Manager::isValidInput(int inputUser, int from, int to)
