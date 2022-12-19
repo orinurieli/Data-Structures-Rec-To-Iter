@@ -62,9 +62,6 @@ int Manager::townDistanceRec(City* srcCity, City* destCity)
 		return NO_PATH;
 	else
 	{
-		//10 13 
-		//1 6 6 7 2 8 2 5 3 4 4 10 9 10 2 9 2 3 3 5 8 10 3 10 1 2
-
 		while (currNearbyCity != nullptr)
 		{
 			nearbyCityNumber = currNearbyCity->getCityNum();
@@ -91,8 +88,6 @@ void Manager::firstWhiteNearbyCity(Stack& Stack, ItemType curr, vector<int> colo
 
 	if (currCity != nullptr)
 	{
-		cout << endl << "We send ";
-		cout << "curr: " << currCity->getCityNum() << endl;
 		ItemType next(_country.getCityInCountry(currCity->getCityNum()), currCity->getNextCity(), START, curr.getPreferreDistance() + 1);
 		Stack.Push(next);
 	}
