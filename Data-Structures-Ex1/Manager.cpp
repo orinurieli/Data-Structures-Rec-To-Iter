@@ -91,8 +91,8 @@ void Manager::firstWhiteNearbyCity(Stack& Stack, ItemType curr, vector<int> colo
 
 	if (currCity != nullptr)
 	{
-		//cout << endl << "We send ";
-		//cout << "curr: " << currCity->getCityNum() << endl;
+		cout << endl << "We send ";
+		cout << "curr: " << currCity->getCityNum() << endl;
 		ItemType next(_country.getCityInCountry(currCity->getCityNum()), currCity->getNextCity(), START, curr.getPreferreDistance() + 1);
 		Stack.Push(next);
 	}
@@ -124,8 +124,6 @@ int Manager::townDistanceIter(City* srcCity, City* destCity)
 	ItemType next(currCity, currCity->getNearbyCities()->getHead(), START, curr.getPreferreDistance() + 1);
 	Stack.Push(next);
 
-	//5 5
-	//1 4 1 2 3 5 2 5 2 3
 	while (!Stack.isEmpty())
 	{
 		curr = Stack.Pop();
@@ -134,10 +132,8 @@ int Manager::townDistanceIter(City* srcCity, City* destCity)
 		if ((curr.getLine() == START) && (_colorCitiesIter[(currCityNumber - 1)] == WHITE))
 		{
 			_colorCitiesIter[(currCityNumber - 1)] = BLACK;
-			//cout << endl << "start city #" << curr.getCity()->getCityNum() << endl;
 			if (currCityNumber == destcitynumber)
 			{
-				//cout << endl << "src == dest, top of the stack" << endl;
 				returnValue = curr.getPreferreDistance();
 				break;
 			}
@@ -161,16 +157,12 @@ int Manager::townDistanceIter(City* srcCity, City* destCity)
 				Stack.Push(next);
 			}
 
-			//cout << endl << "after city #" << curr.getCity()->getCityNum() << endl;
-			//cout << endl << "returnvalue: " << curr.getPreferreDistance() << endl;
-
 		}
-		else // we are back to the first element of the stack
+		else
 		{
-			//cout << endl << endl << "back to srccity" << endl << endl;
 			firstWhiteNearbyCity(Stack, curr, _colorCitiesIter, currCityNumber);
-			returnValue = curr.getPreferreDistance() + 1;
-			//cout << "last returnValue: " << curr.getPreferreDistance() + 1 << endl;
+			returnValue = curr.getPreferreDistance();
+			//returnValue = curr.getPreferreDistance() + 1;
 		}
 	}
 
