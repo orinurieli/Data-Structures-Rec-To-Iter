@@ -3,11 +3,9 @@
 As part of a data structure course, we were asked to implement an algorithm for finding the shortest path between numbered cities, when the path from city to city should be made by having priority to first pass through the city with a lower number.
 
 # Instructions
-
 The assignment includes writing a program in C++ that contains two central functions that implement the TownDistance algorithm.
 One function will implement the algorithm as it is described (in a recursive form) and the other will implement it without
 Using recursion.
-
 
 ## Example
 - Looking at the drawing - for the Src city 2 and Dest city 5, the preferred distance is 2. 
@@ -15,7 +13,17 @@ Using recursion.
 Neighborhoods: 5,3,1. From city 1 there is no way to reach 5, and from city 3 the road to city 5 is 2 long. 
 - Therefore, the preferred route from 2 to 5 is 2-3-5, and the number of transitions in this route is 2.
 
-- ![Towns.jpg](https://drive.google.com/uc?id=16GmEHsr8btcweGmmvtC_ZS6UO5klSq2H)
+- ![Towns.jpg](https://drive.google.com/uc?id=1gQEc6v63u3p5MgS16YthiDzAfD0MX9S0)
+
+
+## Counrty Structure
+The Country structure will be stored in an array of linked lists as follows: 
+- The array will be of size n  
+- The i element in the array will contain a sorted, linked list of cities to which city i has a direct road. 
+- For example, for the drawing above, the Country structure would look like this:
+![Country.jpg](https://drive.google.com/uc?id=16GmEHsr8btcweGmmvtC_ZS6UO5klSq2H)
+ 
+
 
 ## Recursive Way
 ```cpp
