@@ -21,6 +21,7 @@ The Country structure will be stored in an array of linked lists as follows:
 - The array will be of size n  
 - The i element in the array will contain a sorted, linked list of cities to which city i has a direct road. 
 - For example, for the drawing above, the Country structure would look like this:
+
 ![Country.jpg](https://drive.google.com/uc?id=16GmEHsr8btcweGmmvtC_ZS6UO5klSq2H)
  
 
