@@ -61,7 +61,7 @@ int Manager::townDistanceRec(City* srcCity, City* destCity)
 ```
 
 ## Turn Rec To Iter
-- We now want to take this Recursive code, and turn it to Iterative one.
+We now want to take this Recursive code, and turn it to Iterative one.
 1. implement a Stack with data of type ItemType.
 2. Use While loop that continues until we have reached the original stopping condition of the recursion.
 3. Use the Stack to save the value of the local variables, the parameters that are passed
