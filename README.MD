@@ -15,7 +15,7 @@ Using recursion.
 Neighborhoods: 5,3,1. From city 1 there is no way to reach 5, and from city 3 the road to city 5 is 2 long. 
 - Therefore, the preferred route from 2 to 5 is 2-3-5, and the number of transitions in this route is 2.
 
-- add image
+- (https://drive.google.com/file/d/16GmEHsr8btcweGmmvtC_ZS6UO5klSq2H/view?usp=share_link)[]!
 
 ## Recursive Way
 ```cpp
