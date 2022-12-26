@@ -15,7 +15,7 @@ Neighborhoods: 5,3,1. From city 1 there is no way to reach 5, and from city 3 th
 
 ![Towns.jpg](https://drive.google.com/uc?id=1gQEc6v63u3p5MgS16YthiDzAfD0MX9S0)
 
-## Counrty Structure
+## Country Structure
 The Country structure will be stored in an array of linked lists as follows: 
 - The array will be of size n (number of cities). 
 - The i element in the array will contain a sorted, linked list of cities to which city i has a direct road. 
